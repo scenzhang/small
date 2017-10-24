@@ -60,18 +60,21 @@ class SignupForm extends Component {
             value={this.state.name}
             onChange={this.handleInput('name')}
           />
+          <br/>
           <label>Email: </label>
           <input
             type="text"
             onChange={this.handleEmailInput}
             value={this.state.email}
           />
+          <br/>
           <label>Password: </label>
           <input
             type="password"
             onChange={this.handleInput('password')}
             value={this.state.password}
           />
+          <br/>
           
           <label>About you: </label>
           <input
@@ -79,6 +82,7 @@ class SignupForm extends Component {
             onChange={this.handleInput('blurb')}
             value={this.state.blurb}
           />
+          <br/>
 
 
           <button className='submit' onClick={this.handleSubmit} > Sign Up</button>
