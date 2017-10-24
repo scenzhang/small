@@ -17,10 +17,10 @@ class Greeting extends React.Component {
       )
     }
     return (
-      <div>
-        <Link to="signup">Sign Up</Link>
+      <div className="loggedOutNav">
+        <Link className="hoverable" to="signup">Sign Up</Link>
         <br/>
-        <Link to="login">Log In</Link>
+        <Link className="hoverable" to="login">Log In</Link>
       </div>
     )
   }

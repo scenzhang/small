@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Link, Redirect } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 class SignupForm extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,7 @@ class SignupForm extends Component {
 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEmailInput = this.handleEmailInput.bind(this);
   }
 
   handleSubmit(e) {
@@ -22,6 +24,25 @@ class SignupForm extends Component {
   handleInput(field) {
     return (e) => {
       this.setState({ [field]: e.currentTarget.value });
+      if (!e.currentTarget.value) {
+        $('.submit').attr('disabled', 'true');
+      } else {
+        $('.submit').removeAttr('disabled');
+      }
+    }
+  }
+
+  handleEmailInput(e) {
+    // debugger
+    this.setState( { email: e.currentTarget.value });
+    const errors = $('.errors')[0];
+    if (e.currentTarget.value.match(/.+@.+\..+/i)) { //[anything]@[anything].[anything]
+
+      $('.submit').removeAttr('disabled');
+      ReactDOM.unmountComponentAtNode(errors);
+    } else {
+      $('.submit').attr('disabled', 'true');
+      ReactDOM.render(<li>{e.currentTarget.value} is not a valid email address</li>, errors);
     }
   }
 
@@ -30,7 +51,7 @@ class SignupForm extends Component {
     const errorLis = this.props.errors.map((error) => <li>{error}</li>);
     return (
       <div>
-        <ul>{errorLis}</ul>
+        <ul className="errors">{errorLis}</ul>
         <h2>Sign up</h2>
         <form>
           <label>Name</label>
@@ -42,7 +63,7 @@ class SignupForm extends Component {
           <label>Email: </label>
           <input
             type="text"
-            onChange={this.handleInput('email')}
+            onChange={this.handleEmailInput}
             value={this.state.email}
           />
           <label>Password: </label>
@@ -60,7 +81,7 @@ class SignupForm extends Component {
           />
 
 
-          <button onClick={this.handleSubmit} > Sign Up</button>
+          <button className='submit' onClick={this.handleSubmit} > Sign Up</button>
 
         </form>
         <Link
