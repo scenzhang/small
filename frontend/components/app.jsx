@@ -8,7 +8,7 @@ import SignupFormContainer from './forms/signup_form_container';
 const App = () => (
   <div>
     <header>
-      <h1>Small</h1>
+      <h1 className="logo serif">Small</h1>
       <GreetingContainer />
     </header>
 

@@ -29,16 +29,16 @@ class LoginForm extends Component {
     return (
       <div>
         <ul>{errorLis}</ul>
-        <h2>Log In</h2>
-        <form>
-          <label>Email: </label>
+        <h2 className="serif">Log In</h2>
+        <form className="userForm">
+          <label>Email: </label> <br/>
           <input
             type="text"
             onChange={this.handleInput('email')}
             value={this.state.email}
           />
           <br/>
-          <label>Password: </label>
+          <label>Password: </label> <br/>
           <input
             type="password"
             onChange={this.handleInput('password')}

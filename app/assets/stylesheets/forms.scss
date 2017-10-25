@@ -1,0 +1,22 @@
+.userForm input {
+    margin: 4px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+.userForm>label {
+    font-family: Roboto;
+}
+
+.invalid {
+    background-color: #e89d99;
+}
+
+input {
+    font-family: Roboto
+}

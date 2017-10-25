@@ -9,8 +9,8 @@ class SignupForm extends Component {
       email: "",
       password: "",
       name: "",
-      blurb: ""
-
+      blurb: "",
+      emailValid: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
@@ -26,6 +26,7 @@ class SignupForm extends Component {
       this.setState({ [field]: e.currentTarget.value });
       if (!e.currentTarget.value) {
         $('.submit').attr('disabled', 'true');
+
       } else {
         $('.submit').removeAttr('disabled');
       }
@@ -34,16 +35,18 @@ class SignupForm extends Component {
 
   handleEmailInput(e) {
     // debugger
-    this.setState( { email: e.currentTarget.value });
-    const errors = $('.errors')[0];
-    if (e.currentTarget.value.match(/.+@.+\..+/i)) { //[anything]@[anything].[anything]
-
-      $('.submit').removeAttr('disabled');
-      ReactDOM.unmountComponentAtNode(errors);
+    this.setState({ email: e.currentTarget.value });
+    const emailContainer = $('.email-field-container')[0];
+    if (!e.currentTarget.value.match(/.+@.+\..+/i)) { //[anything]@[anything].[anything]
+      this.setState({emailValid: false});
     } else {
-      $('.submit').attr('disabled', 'true');
-      ReactDOM.render(<li>{e.currentTarget.value} is not a valid email address</li>, errors);
+      this.setState({emailValid: true});
     }
+    //  else {
+    //   $('.submit').attr('disabled', 'true');
+    //   $('.emailInput').css('background-color', '#e89d99');
+    //   $('.emailInput').append($())
+    // }
   }
 
   render() {
@@ -52,47 +55,49 @@ class SignupForm extends Component {
     return (
       <div>
         <ul className="errors">{errorLis}</ul>
-        <h2>Sign up</h2>
-        <form>
-          <label>Name</label>
+        <h2 className="serif">Sign Up</h2>
+        <form className="userForm">
+
+          <label>Name</label> <br />
           <input
             type="text"
             value={this.state.name}
             onChange={this.handleInput('name')}
           />
-          <br/>
-          <label>Email: </label>
+
+          <br />
+          
+          <label>Email: </label> <br />
           <input
             type="text"
             onChange={this.handleEmailInput}
             value={this.state.email}
+            className={ this.state.emailValid ? "emailInput" : "invalid"}
           />
-          <br/>
-          <label>Password: </label>
+          <span>{this.state.emailValid ? "" : "invalid email"}</span>
+          <br />
+        
+          <label>Password: </label> <br />
           <input
             type="password"
             onChange={this.handleInput('password')}
             value={this.state.password}
           />
-          <br/>
-          
-          <label>About you: </label>
+          <br />
+
+          <label>About you: </label> <br />
           <input
             type="text"
             onChange={this.handleInput('blurb')}
             value={this.state.blurb}
           />
-          <br/>
+          <br />
 
 
           <button className='submit' onClick={this.handleSubmit} > Sign Up</button>
 
         </form>
-        <Link
-          to='login'
-        >
-          Log In
-        </Link>
+
       </div>
     );
   }

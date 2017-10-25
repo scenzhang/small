@@ -8,6 +8,7 @@
     "babel-preset-react": "^6.24.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-modal": "^3.0.4",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -23,8 +24,8 @@
   "directories": {
     "test": "test"
   },
-  "engines" : {
-    "node" : "6.10.1",
+  "engines": {
+    "node": "6.10.1",
     "npm": "3.10.10"
   },
   "scripts": {
