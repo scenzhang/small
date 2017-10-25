@@ -28,11 +28,7 @@
 }
 
 
-label {
-    color: rgba(0,0,0,.54)!important;
-    font-size: 15px;
-    margin: 5px;
-}
+
 .userForm {
     display: flex;
     flex-direction: column;
@@ -77,8 +73,16 @@ input:focus {
 
 .userForm>label {
     font-family: Roboto;
+    color: rgba(0,0,0,.54)!important;
+    margin: 5px;
 }
 
+.login-div label {
+    font-size: 16px;
+}
+.signup-div label {
+    font-size: 12px;
+}
 .invalid {
     background-color: #e89d99!important;
 }
