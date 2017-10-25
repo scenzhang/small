@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { AuthRoute } from '../util/route_util';
-import GreetingContainer from './greeting/greeting_container';
+import NavBarContainer from './navbar/navbar_container';
 import LoginFormContainer from './forms/login_form_container';
 import SignupFormContainer from './forms/signup_form_container';
 
 const App = () => (
   <div>
     <header>
-      <Route path="/" component={GreetingContainer}></Route>
+      <Route path="/" component={NavBarContainer}></Route>
     </header>
 
     <AuthRoute path="/login" component={LoginFormContainer} />

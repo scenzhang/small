@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class Greeting extends React.Component {
+class NavBar extends React.Component {
 
   render() {
     let rightNav = null;
@@ -38,4 +38,4 @@ class Greeting extends React.Component {
     this.props.logout();
   }
 }
-export default Greeting;
+export default NavBar;

@@ -1,0 +1,1 @@
+json.extract! @article, :id, :title, :blurb, :body, :user_id
