@@ -9,12 +9,14 @@ class SignupForm extends Component {
     this.state = {
       email: "",
       password: "",
+      pwConfirm: "",
       name: "",
       blurb: "",
       emailValid: true,
       allFieldsFilled: true,
       pwValidLen: true,
-      buttonDisabled: true
+      buttonDisabled: true,
+      pwMatch: true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
@@ -35,7 +37,8 @@ class SignupForm extends Component {
 
     if (!isEqual(this.state, nextState)) {
       this.setState({ emailValid, allFieldsFilled, pwValidLen });
-      this.setState( {buttonDisabled: !(emailValid && allFieldsFilled && pwValidLen)});
+      this.setState({ buttonDisabled: !(emailValid && allFieldsFilled && pwValidLen) });
+      this.setState({ pwMatch: nextState.password === nextState.pwConfirm })
     }
 
 
@@ -64,23 +67,23 @@ class SignupForm extends Component {
       <div className="signup-div">
         <ul className="errors">{errorLis}</ul>
         <h1 className="serif heading">Join Small.</h1>
-        <h2 className="subheading">Create an account to personalize your homepage, 
-          follow your favorite authors and publications, 
+        <h2 className="subheading">Create an account to personalize your homepage,
+          follow your favorite authors and publications,
           applaud stories you love, and more.
-    
+
         </h2>
         <form className="userForm">
 
-          <label>Name</label> <br />
+          <label>Name</label>
           <input
             type="text"
             value={this.state.name}
             onChange={this.handleInput('name')}
           />
 
-          <br />
 
-          <label>Email: </label> <br />
+
+          <label>Email </label>
           <input
             type="text"
             onChange={this.handleEmailInput}
@@ -88,25 +91,32 @@ class SignupForm extends Component {
             className={this.state.emailValid ? "emailInput" : "invalid"}
           />
           <span>{this.state.emailValid ? "" : "invalid email"}</span>
-          <br />
 
-          <label>Password: </label> <br />
+
+          <label>Password </label>
           <input
             type="password"
             onChange={this.handleInput('password')}
             value={this.state.password}
-            className={this.state.pwValidLen ? "" : "invalid"}
+            className={this.state.pwValidLen && this.state.pwMatch ? "" : "invalid"}
           />
-          <span>{this.state.pwValidLen ? "" : "password too short"}</span>          
-          <br />
+          <span>{this.state.pwValidLen ? "" : "password too short"}</span>
 
-          <label>About you: </label> <br />
+          <label>Confirm password</label>
+          <input
+            type="password"
+            onChange={this.handleInput('pwConfirm')}
+            value={this.state.pwConfirm}
+            className={this.state.pwMatch ? "" : "invalid"}
+          />
+          <span>{this.state.pwMatch ? "" : "passwords don't match"}</span>
+          <label>About you </label>
           <input
             type="text"
             onChange={this.handleInput('blurb')}
             value={this.state.blurb}
           />
-          <br />
+
 
 
           <button className='submit' disabled={this.state.buttonDisabled} onClick={this.handleSubmit}> Sign Up</button>

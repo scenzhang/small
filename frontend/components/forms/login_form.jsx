@@ -36,14 +36,14 @@ class LoginForm extends Component {
     
         </h2>
         <form className="userForm">
-          <label>Email: </label> <br />
+          <label>Email </label> <br />
           <input
             type="text"
             onChange={this.handleInput('email')}
             value={this.state.email}
           />
           <br />
-          <label>Password: </label> <br />
+          <label>Password </label> <br />
           <input
             type="password"
             onChange={this.handleInput('password')}
