@@ -2,9 +2,9 @@ import {RECEIVE_ALL_ARTICLES,
   RECEIVE_ARTICLE,
   REMOVE_ARTICLE,
 } from '../actions/article_actions';
-import _ from 'lodash';
+import {merge} from 'lodash';
 const ArticlesReducer = (state = {}, action) => {
-  const newState = _.merge({}, state);
+  const newState = merge({}, state);
   switch (action.type) {
     case RECEIVE_ALL_ARTICLES: {
       return action.articles;

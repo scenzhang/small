@@ -1,5 +1,5 @@
 class Api::ArticlesController < ApplicationController
-  before_action :ensure_logged_in
+  before_action :ensure_logged_in, except: :index
 
   def create
     @article = Article.new(article_params)
