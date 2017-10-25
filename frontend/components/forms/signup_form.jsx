@@ -16,7 +16,8 @@ class SignupForm extends Component {
       allFieldsFilled: true,
       pwValidLen: true,
       buttonDisabled: true,
-      pwMatch: true
+      pwMatch: true,
+      blurbTooLong: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
@@ -29,15 +30,15 @@ class SignupForm extends Component {
   }
 
   componentWillUpdate(_, nextState) {
-    let emailValid, allFieldsFilled, pwValidLen;
+    let emailValid, allFieldsFilled, pwValidLen, blurbTooLong;
 
-    emailValid = nextState.email.match(/.+@.+\..+/i) || !nextState.email//[anything]@[anything].[anything]
+    emailValid = nextState.email.match(/.+@.+\...+/i) || !nextState.email//[anything]@[anything].[anything]
     allFieldsFilled = (nextState.name && nextState.email && nextState.password && nextState.blurb);
     pwValidLen = nextState.password.length >= 6 || nextState.password.length === 0;
-
+    blurbTooLong = nextState.blurb.length > 140
     if (!isEqual(this.state, nextState)) {
-      this.setState({ emailValid, allFieldsFilled, pwValidLen });
-      this.setState({ buttonDisabled: !(emailValid && allFieldsFilled && pwValidLen) });
+      this.setState({ emailValid, allFieldsFilled, pwValidLen, blurbTooLong });
+      this.setState({ buttonDisabled: !(emailValid && allFieldsFilled && pwValidLen && !blurbTooLong) });
       this.setState({ pwMatch: nextState.password === nextState.pwConfirm })
     }
 
@@ -47,17 +48,12 @@ class SignupForm extends Component {
   handleInput(field) {
     return (e) => {
       this.setState({ [field]: e.currentTarget.value });
-      // , buttonDisabled: Boolean(e.currentTarget.value)
     }
   }
 
   handleEmailInput(e) {
     this.setState({ email: e.currentTarget.value });
-    // if (!e.currentTarget.value.match(/.+@.+\..+/i) && e.currentTarget.value) { //[anything]@[anything].[anything]
-    //   this.setState({emailValid: false});
-    // } else {
-    //   this.setState({emailValid: true});
-    // }
+
   }
 
   render() {
@@ -111,18 +107,21 @@ class SignupForm extends Component {
           />
           <span>{this.state.pwMatch ? "" : "passwords don't match"}</span>
           <label>About you </label>
-          <input
-            type="text"
+          <textarea
             onChange={this.handleInput('blurb')}
+            className={this.state.blurbTooLong ? "invalid" : ""}
             value={this.state.blurb}
-          />
+          >
+          </textarea>
+          
+          <span>{140-this.state.blurb.length}</span>
 
 
 
           <button className='submit' disabled={this.state.buttonDisabled} onClick={this.handleSubmit}> Sign Up</button>
 
         </form>
-        <div className="login-link">Already have an account? <Link to="login">Log in.</Link></div>
+        <div className="login-link">Already have an account? <Link to="login" onClick={this.props.clearErrors}>Log in.</Link></div>
 
       </div>
     );

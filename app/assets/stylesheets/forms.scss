@@ -1,4 +1,4 @@
-.userForm input {
+.userForm input, .userForm textArea {
     margin: 5px;
     border-top: none;
     border-left: none;
@@ -8,10 +8,14 @@
     flex-direction: column;
     width: 300px;
     font-family: Roboto;
-    background-color: rgb(215, 239, 238);
+    // background-color: rgb(215, 239, 238);
     font-size: 16px;
 }
-
+.userForm textArea {
+    border-bottom: none;
+    height: 75px;
+    resize: none;
+}
 .heading {
     text-align: center;
     padding: 30px  0 10px 0;
@@ -35,9 +39,8 @@
     align-items: center;
 }
 
-input:focus {
+input:focus, textarea:focus {
     outline: none;
-    color: rgba(0,0,0,.76);
 }
 
 .errors,
@@ -51,7 +54,8 @@ input:focus {
 }
 
 .signup-div,
-.signup-div input {
+.signup-div input,
+.signup-div textarea {
     background-color: #E8F3EC;
 }
 

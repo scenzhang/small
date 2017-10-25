@@ -54,7 +54,7 @@ class LoginForm extends Component {
           <button onClick={this.handleSubmit} > Log In </button>
 
         </form>
-        <div className="signup-link">Are you new to Small? <Link to="signup">Sign up.</Link></div>
+        <div className="signup-link">Are you new to Small? <Link to="signup" onClick={this.props.clearErrors}>Sign up.</Link></div>
 
       </div>
     );
