@@ -10,7 +10,7 @@ class SignupForm extends Component {
       password: "",
       name: "",
       blurb: "",
-      emailValid: true
+      emailValid: true,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
@@ -19,6 +19,7 @@ class SignupForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.signup(this.state);
+    
   }
 
   handleInput(field) {
@@ -37,16 +38,11 @@ class SignupForm extends Component {
     // debugger
     this.setState({ email: e.currentTarget.value });
     const emailContainer = $('.email-field-container')[0];
-    if (!e.currentTarget.value.match(/.+@.+\..+/i)) { //[anything]@[anything].[anything]
+    if (!e.currentTarget.value.match(/.+@.+\..+/i) && e.currentTarget.value) { //[anything]@[anything].[anything]
       this.setState({emailValid: false});
     } else {
       this.setState({emailValid: true});
     }
-    //  else {
-    //   $('.submit').attr('disabled', 'true');
-    //   $('.emailInput').css('background-color', '#e89d99');
-    //   $('.emailInput').append($())
-    // }
   }
 
   render() {

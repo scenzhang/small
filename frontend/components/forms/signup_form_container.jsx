@@ -13,7 +13,8 @@ const mapStateToProps = (state, ownProps) => {
 
 
 const mapDispatchToProps = (dispatch, { location}) => ({
-  signup: (user) => dispatch(sessionActions.signup(user))
+  signup: (user) => dispatch(sessionActions.signup(user)),
+  clearErrors: ()=>dispatch(sessionActions.clearErrors())
 
 });
 

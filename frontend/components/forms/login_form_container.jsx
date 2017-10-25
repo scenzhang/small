@@ -12,8 +12,9 @@ const mapStateToProps = (state, ownProps) => {
 
 
 const mapDispatchToProps = (dispatch, { location}) => ({
-  login: (user) => dispatch(sessionActions.login(user))
-
+  login: (user) => dispatch(sessionActions.login(user)),
+  clearErrors: ()=>dispatch(sessionActions.clearErrors())
+  
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

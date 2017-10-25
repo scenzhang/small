@@ -8,7 +8,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ( {
-  logout: () => dispatch(sessionActions.logout())
+  logout: () => dispatch(sessionActions.logout()),
+  clearErrors: () => dispatch(sessionActions.clearErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Greeting);

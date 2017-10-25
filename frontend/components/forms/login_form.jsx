@@ -31,25 +31,25 @@ class LoginForm extends Component {
         <ul>{errorLis}</ul>
         <h2 className="serif">Log In</h2>
         <form className="userForm">
-          <label>Email: </label> <br/>
+          <label>Email: </label> <br />
           <input
             type="text"
             onChange={this.handleInput('email')}
             value={this.state.email}
           />
-          <br/>
-          <label>Password: </label> <br/>
+          <br />
+          <label>Password: </label> <br />
           <input
             type="password"
             onChange={this.handleInput('password')}
             value={this.state.password}
           />
-          <br/>
+          <br />
 
           <button onClick={this.handleSubmit} > Log In </button>
 
         </form>
-      
+
       </div>
     );
   }
