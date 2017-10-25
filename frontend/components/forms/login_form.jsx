@@ -27,9 +27,14 @@ class LoginForm extends Component {
     if (this.props.loggedIn) return (<Redirect to='/' />);
     const errorLis = this.props.errors.map((error) => <li>{error}</li>);
     return (
-      <div>
-        <ul>{errorLis}</ul>
-        <h2 className="serif">Log In</h2>
+      <div className="login-div">
+        <ul className="errors">{errorLis}</ul>
+        <h1 className="serif heading">Welcome back.</h1>
+        <h2 className="subheading">Sign in to access your personalized homepage, follow 
+          authors and topics you love, and clap for stories that matter to you.
+        
+    
+        </h2>
         <form className="userForm">
           <label>Email: </label> <br />
           <input
@@ -49,6 +54,7 @@ class LoginForm extends Component {
           <button onClick={this.handleSubmit} > Log In </button>
 
         </form>
+        <div className="signup-link">Are you new to Small? <Link to="signup">Sign up.</Link></div>
 
       </div>
     );

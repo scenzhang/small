@@ -3,17 +3,68 @@
     border-top: none;
     border-left: none;
     border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 300px;
+}
+
+.heading {
+    text-align: center;
+    padding: 30px  0 10px 0;
+}
+.subheading {
+    text-align: center;
+    font-family: Roboto;
+    font-size: 17px;
+    padding: 0 0 20px 0;
+    color: rgba(0,0,0,.76);
+    max-width: 400px;
+    margin: auto;
+
+}
+
+
+label {
+    color: rgba(0,0,0,.54)!important;
+    font-size: 15px;
 }
 .userForm {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 input:focus {
     outline: none;
+}
+
+.errors,
+.heading {
+    margin: 0;
+}
+
+.login-div,
+.login-div input {
+    background-color: #D7EFEE;
+}
+
+.signup-div,
+.signup-div input {
+    background-color: #E8F3EC;
+}
+
+[class*="-div"] {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    width: 600px;
+    margin: 0 auto;
+    padding: 6px ;
+}
+[class*="-link"] {
+    text-align: center;
+    padding: 3px;
+    margin: 4px auto;
+    color: rgba(0,0,0,.76)!important
 }
 
 .userForm>label {
@@ -21,9 +72,10 @@ input:focus {
 }
 
 .invalid {
-    background-color: #e89d99;
+    background-color: #e89d99!important;
 }
 
 input {
-    font-family: Roboto
+    font-family: Roboto;
+    background-color: rgb(215, 239, 238);
 }
