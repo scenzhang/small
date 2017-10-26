@@ -15,80 +15,69 @@
  *= ./forms.scss
  */
 
-
-
 // // CSS Reset
 // @import "base/reset.scss";
-
-
-
-span, div {
-  font-family: Roboto;
+span,
+div {
+    font-family: Roboto;
 }
+
 body {
-  margin: 0;
-  height: 100vh;
-  background-color: #f0f0f0;
+    margin: 0;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
 ul {
-  list-style: none;
-  font-family: Roboto;
+    list-style: none;
+    font-family: Roboto;
 }
+
 button {
-  background-color: rgb(3, 168, 124);
-  border: 0;
-  color: white;
-  border-radius: 5px;
-  padding: 5px 12px;
-  font-family: Roboto;
-  height: 30px;
-  cursor: pointer;
+    background-color: rgb(3, 168, 124);
+    border: 0;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-family: Roboto;
+    height: 30px;
+    cursor: pointer;
 }
 
 button:hover {
-  background-color: rgb(3, 155, 115);
+    background-color: rgb(3, 155, 115);
 }
 
-
 button:disabled {
-  background-color: rgba(10, 236, 176, 0.514);
-  color: rgb(85, 84, 84);
-  cursor: default;
+    background-color: rgba(10, 236, 176, 0.514);
+    color: rgb(85, 84, 84);
+    cursor: default;
 }
 
 .hoverable {
-  background-color: white;
-  border: 1px solid rgb(3, 168, 124);
-  border-radius: 5px;
-  font-family: Roboto;
-  padding: 0px 12px;
-  height: 30px;
-  vertical-align: middle;
-  cursor: pointer;
+    background-color: white;
+    border: 1px solid rgb(3, 168, 124);
+    border-radius: 5px;
+    font-family: Roboto;
+    padding: 0px 12px;
+    height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
 }
+
 a {
-  color: rgb(3, 168, 124);
-  text-decoration: none;
+    color: rgb(3, 168, 124);
+    text-decoration: none;
 }
+
 .hoverable:hover {
-  color: rgb(3, 155, 115);
-  border: 1px solid rgb(3, 155, 115);
-}
-
-.loggedOutNav {
-  display: flex;
-  /* padding: 4px; */
-}
-
-.loggedOutNav a {
-  margin: 5px 10px;
+    color: rgb(3, 155, 115);
+    border: 1px solid rgb(3, 155, 115);
 }
 
 .serif {
-font-family: "Playfair Display";
+    font-family: "Playfair Display";
 }
 
 //components
-
 @import "components/*";

@@ -22,7 +22,7 @@ class Article extends Component {
     return (
       <div>
       <h1> {article.title} </h1>
-      <h2> by {article.author} </h2>
+      <h2> {article.author} </h2>
       <h3>{article.blurb}</h3>
       {articlePs}
       </div>

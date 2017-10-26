@@ -12,6 +12,7 @@ class NavBar extends React.Component {
         (
           <nav className="logged-in right-nav">
             <span>Welcome, {this.props.currentUser.name}</span>
+            <Link className="hoverable" to="/articles/new">New story</Link>
             <button
               onClick={this.props.logout}
             >

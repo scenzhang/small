@@ -72,7 +72,7 @@ class SignupForm extends Component {
           applaud stories you love, and more.
 
         </h2>
-        <form className="userForm">
+        <form className="user-form">
 
           <label>Name</label>
           <input

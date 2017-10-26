@@ -38,7 +38,7 @@ class LoginForm extends Component {
         
     
         </h2>
-        <form className="userForm">
+        <form className="user-form">
           <label>Email </label> <br />
           <input
             type="text"
