@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as sessionActions from '../../actions/session_actions';
+
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -61,4 +64,19 @@ class LoginForm extends Component {
   }
 }
 
-export default withRouter(LoginForm);
+// export default withRouter(LoginForm);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    loggedIn: !!state.currentUser,
+    errors: state.errors.session,
+  };
+}
+
+
+const mapDispatchToProps = (dispatch, { location}) => ({
+  login: (user) => dispatch(sessionActions.login(user)),
+  clearErrors: ()=>dispatch(sessionActions.clearErrors())
+  
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));

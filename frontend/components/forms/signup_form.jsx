@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { Link, Redirect } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import * as sessionActions from '../../actions/session_actions';
 import { isEqual } from 'lodash';
 class SignupForm extends Component {
   constructor(props) {
@@ -128,4 +130,20 @@ class SignupForm extends Component {
   }
 }
 
-export default withRouter(SignupForm);
+// export default withRouter(SignupForm);
+const mapStateToProps = (state, ownProps) => {
+  return {
+    loggedIn: !!state.currentUser,
+    errors: state.errors.session,
+    formType: ownProps.location.pathname.slice(1)
+  };
+}
+
+
+const mapDispatchToProps = (dispatch, { location}) => ({
+  signup: (user) => dispatch(sessionActions.signup(user)),
+  clearErrors: ()=>dispatch(sessionActions.clearErrors())
+
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignupForm));
