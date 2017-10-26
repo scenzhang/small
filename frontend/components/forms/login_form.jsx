@@ -66,8 +66,9 @@ class LoginForm extends Component {
 
 // export default withRouter(LoginForm);
 const mapStateToProps = (state, ownProps) => {
+  // debugger
   return {
-    loggedIn: !!state.currentUser,
+    loggedIn: !!state.session.currentUser,
     errors: state.errors.session,
   };
 }

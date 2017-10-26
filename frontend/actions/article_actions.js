@@ -6,7 +6,15 @@ export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE';
 export const UPDATE_ARTICLE = 'UPDATE_ARTICLE'
 export const REMOVE_ARTICLE = 'REMOVE_ARTICLE'
 export const RECEIVE_ARTICLE_ERRORS = 'RECEIVE_ARTICLE_ERRORS';
+export const LOAD_ARTICLE = "LOAD_ARTICLE";
+export const LOAD_ALL_ARTICLES = "LOAD_ALL_ARTICLES";
+
+export const loadArticle = () => ({ type: LOAD_ARTICLE });
+
+export const loadArticles = () => ({ type: LOAD_ALL_ARTICLES });
+
 export const fetchArticles = () => (dispatch) => {
+  dispatch(loadArticles());
   ArticleUtil.fetchArticles().then(
     (articles) => dispatch(receiveAllArticles(articles))
   );
@@ -17,6 +25,7 @@ export const receiveAllArticles = (articles) => ({
 });
 
 export const fetchArticle = (id) => (dispatch) => {
+  dispatch(loadArticle());
   ArticleUtil.fetchArticle(id).then(
     (article) => dispatch(receiveArticle(article))
   );
@@ -36,18 +45,21 @@ export const createArticle = (article) => (dispatch) => {
     (res) => receiveErrors(res.responseJSON)
   );
 };
+
 export const updateArticle = (article) => (dispatch) => {
   ArticleUtil.updateArticle(article).then(
     (article) => dispatch(receiveArticle(article)),
     (res) => receiveErrors(res.responseJSON)
   );
 };
+
 export const deleteArticle = (id) => (dispatch) => {
   ArticleUtil.updateArticle(id).then(
     () => dispatch(removeArticle(id)),
     (res) => receiveErrors(res.responseJSON)
   );
 };
+
 export const removeArticle = (id) => {
-  return { type: REMOVE_ARTICLE, id}
+  return { type: REMOVE_ARTICLE, id }
 }

@@ -1,1 +1,2 @@
-json.extract! @article, :id, :title, :blurb, :body, :user_id
+json.extract! @article, :id, :title, :blurb, :body
+json.author @article.user.name

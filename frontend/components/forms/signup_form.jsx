@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import * as sessionActions from '../../actions/session_actions';
 import { isEqual } from 'lodash';
+import Textarea from 'react-textarea-autosize';
+
 class SignupForm extends Component {
   constructor(props) {
     super(props);
@@ -109,12 +111,13 @@ class SignupForm extends Component {
           />
           <span>{this.state.pwMatch ? "" : "passwords don't match"}</span>
           <label>About you </label>
-          <textarea
+          <Textarea
             onChange={this.handleInput('blurb')}
             className={this.state.blurbTooLong ? "invalid" : ""}
             value={this.state.blurb}
+            onKeyDown={(e) => { if (e.which === 13) e.preventDefault()} } //disable newlines in about me
           >
-          </textarea>
+          </Textarea>
           
           <span>{140-this.state.blurb.length}</span>
 

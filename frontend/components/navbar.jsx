@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as sessionActions from '../actions/session_actions';
 
 class NavBar extends React.Component {
 
@@ -38,4 +40,16 @@ class NavBar extends React.Component {
     this.props.logout();
   }
 }
-export default NavBar;
+
+
+
+const mapStateToProps = (state) => ({
+  currentUser: state.session.currentUser
+});
+
+const mapDispatchToProps = (dispatch) => ( {
+  logout: () => dispatch(sessionActions.logout()),
+  clearErrors: () => dispatch(sessionActions.clearErrors())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
