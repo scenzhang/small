@@ -26,6 +26,7 @@ class ArticleForm extends Component {
   }
   render() {
     // debugger
+    
     if (!this.props.loggedIn) {
       return <Redirect to="/login"/>
     }
