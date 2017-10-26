@@ -5,7 +5,7 @@ class Article < ApplicationRecord
   
   def ensure_blurb
     if self.blurb.nil? || self.blurb.empty? 
-      self.blurb = self.body.split(".").first
+      self.blurb = "#{self.body[0...140]}..."
     end
   end
 end

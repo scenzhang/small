@@ -14,7 +14,7 @@ const ArticlesReducer = (state = {}, action) => {
       return newState;
     }
     case REMOVE_ARTICLE: {
-      delete newState[action.article.id];
+      delete newState[action.id];
       return newState;
     }
     default: {

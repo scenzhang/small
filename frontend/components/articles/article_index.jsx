@@ -11,9 +11,11 @@ class ArticleIndex extends Component {
   }
   render() {
     return (
+      <div className="index-div">
       <ul>
-        {this.props.articles.map( article => <ArticlePreview article={article} author="asdf"/>)}
+        {this.props.articles.map( article => <ArticlePreview key={article.id} article={article} author="asdf"/>)}
       </ul>
+      </div>
     );
   }
 }

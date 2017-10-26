@@ -78,6 +78,15 @@ a {
 .serif {
     font-family: "Playfair Display";
 }
-
+.dropdown-button {
+    cursor: pointer;
+    fill: rgba(0, 0, 0, 0.50);
+}
+.dropdown-button:hover {
+    fill: rgba(0,0,0,0.85);
+}
+.hidden {
+    display: none
+}
 //components
 @import "components/*";

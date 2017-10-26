@@ -15,7 +15,7 @@ export const loadArticles = () => ({ type: LOAD_ALL_ARTICLES });
 
 export const fetchArticles = () => (dispatch) => {
   dispatch(loadArticles());
-  ArticleUtil.fetchArticles().then(
+  return ArticleUtil.fetchArticles().then(
     (articles) => dispatch(receiveAllArticles(articles))
   );
 }
@@ -26,7 +26,7 @@ export const receiveAllArticles = (articles) => ({
 
 export const fetchArticle = (id) => (dispatch) => {
   dispatch(loadArticle());
-  ArticleUtil.fetchArticle(id).then(
+  return ArticleUtil.fetchArticle(id).then(
     (article) => dispatch(receiveArticle(article))
   );
 };
@@ -40,21 +40,21 @@ export const receiveErrors = (errors) => {
 };
 
 export const createArticle = (article) => (dispatch) => {
-  ArticleUtil.createArticle(article).then(
+  return ArticleUtil.createArticle(article).then(
     (article) => dispatch(receiveArticle(article)),
     (res) => receiveErrors(res.responseJSON)
   );
 };
 
 export const updateArticle = (article) => (dispatch) => {
-  ArticleUtil.updateArticle(article).then(
+  return ArticleUtil.updateArticle(article).then(
     (article) => dispatch(receiveArticle(article)),
     (res) => receiveErrors(res.responseJSON)
   );
 };
 
 export const deleteArticle = (id) => (dispatch) => {
-  ArticleUtil.updateArticle(id).then(
+  return ArticleUtil.deleteArticle(id).then(
     () => dispatch(removeArticle(id)),
     (res) => receiveErrors(res.responseJSON)
   );

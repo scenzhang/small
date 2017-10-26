@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as sessionActions from '../../actions/session_actions';
-
+import Errors from '../errors'
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -28,10 +28,10 @@ class LoginForm extends Component {
 
   render() {
     if (this.props.loggedIn) return (<Redirect to='/' />);
-    const errorLis = this.props.errors.map((error) => <li>{error}</li>);
+    // const errorLis = this.props.errors.map((error) => <li>{error}</li>);
     return (
       <div className="login-div">
-        <ul className="errors">{errorLis}</ul>
+        <Errors errors={this.props.errors}/>
         <h1 className="serif heading">Welcome back.</h1>
         <h2 className="subheading">Sign in to access your personalized homepage, follow 
           authors and topics you love, and clap for stories that matter to you.

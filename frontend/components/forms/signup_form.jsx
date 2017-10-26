@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as sessionActions from '../../actions/session_actions';
 import { isEqual } from 'lodash';
 import Textarea from 'react-textarea-autosize';
-
+import Errors from '../errors'
 class SignupForm extends Component {
   constructor(props) {
     super(props);
@@ -62,10 +62,10 @@ class SignupForm extends Component {
 
   render() {
     if (this.props.loggedIn) return (<Redirect to='/' />);
-    const errorLis = this.props.errors.map((error) => <li>{error}</li>);
+    // const errorLis = this.props.errors.map((error) => <li>{error}</li>);
     return (
       <div className="signup-div">
-        <ul className="errors">{errorLis}</ul>
+        <Errors errors={this.props.errors}/>
         <h1 className="serif heading">Join Small.</h1>
         <h2 className="subheading">Create an account to personalize your homepage,
           follow your favorite authors and publications,
@@ -119,7 +119,7 @@ class SignupForm extends Component {
           >
           </Textarea>
           
-          <span>{140-this.state.blurb.length}</span>
+          <span className="chars-left">{140-this.state.blurb.length}</span>
 
 
 

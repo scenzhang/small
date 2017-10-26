@@ -8,7 +8,7 @@ export const createArticle = article => $.ajax({
   data: {article}
 });
 export const updateArticle = article => $.ajax({
-  url: `api/articles`,
+  url: `api/articles/${article.id}`,
   method: 'patch',
   data: {article}
 });

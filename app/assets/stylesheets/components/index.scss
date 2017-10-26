@@ -1,0 +1,28 @@
+.index-div {
+  background-color: #fff;
+  margin: 0;
+  width: 100%;
+}
+
+.preview-div {
+  margin-bottom: 10px;
+  width: 600px;
+  height: 125px;
+}
+
+.article-title {
+  color: #000;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.article-blurb {
+  color: rgba(0,0,0,0.6);
+}
+.preview-bottom {
+  color: rgba(0,0,0,0.8);
+  font-size: 16px;
+  justify-content: space-between;
+  display: flex;
+  margin-top: 6px;
+}

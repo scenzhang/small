@@ -1,0 +1,64 @@
+.article-body p {
+  margin: 20px 0;
+  font-size: 18px;
+}
+
+.article-container {
+  margin: 0 auto;
+  width: 66%;
+  background-color: #fff
+}
+.fill-container {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff
+}
+.article-heading {
+  display: flex;
+  flex-direction: column;
+}
+.article-container h1 {
+  font-size: 40px;
+}
+.article-container h2 {
+  font-size: 30px;
+  color: rgba(0,0,0,.50);
+}
+
+.delete-article {
+  color: rgba(255, 0, 0, 0.445);
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  
+}
+
+.dropdown ul {
+  position: absolute;
+  background: white;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.25), 0 0 1px rgba(0,0,0,.35);
+  top: 2px;
+  left: -8px;
+  
+}
+.dropdown li {
+  margin: 5px 10px;
+}
+.dropdown:before {
+  transform: translate(3px, -4px) rotate(45deg);
+  box-shadow: -1px -1px 1px -1px rgba(0,0,0,.54);
+  content: '';
+  // display: block;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  position: absolute;
+  border-radius: 2px;
+  z-index: 9000;
+}
+  

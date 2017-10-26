@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import dateStr from '../../util/date_str'
 function ArticlePreview({ article }) {
-  let date = new Date(article.date);
-  let today = new Date();
-  let yrStr = today.getFullYear() === date.getFullYear() ? "" : ` ${date.getFullYear()}`;
-  let dateStr = `${date.toLocaleString('en-us', {month: "short"})} ${date.getDate()}${yrStr}`;
+  let date = dateStr(article.date)
   return (
-    <li className='article-preview'>
+    <li className='article-preview' key={article.id}>
+      <div className='preview-div'>
       <Link to={`/articles/${article.id}`}>
-        <div className="article-title">{article.title}</div>
-        <span className="article-blurb">{article.blurb}</span>
-        <span className="article-author">by {article.author}</span>
-        <span>{dateStr}</span>
+        <h1 className="article-title">{article.title}</h1>
+        <div className="article-blurb">{article.blurb}</div>
+        <div className="preview-bottom"><span className="article-author">by {article.author}</span>
+        <span>{date}</span>
+        </div>
       </Link>
+      </div>
     </li>
 
   );
