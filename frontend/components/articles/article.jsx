@@ -17,7 +17,7 @@ class Article extends Component {
   }
   render() {
     let article = this.props.article || { body: "" };
-    if (this.props.loading) return <div>loading...</div>;
+    if (this.props.loading || !article.body) return <div>loading...</div>;
     let articlePs = article.body.split("\n").map((p) => <p>{p}</p>)
     // debugger
     return (
