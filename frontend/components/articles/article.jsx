@@ -17,6 +17,7 @@ class Article extends Component {
   }
   render() {
     let article = this.props.article || { body: "" };
+    if (this.props.loading) return <div>loading...</div>;
     let articlePs = article.body.split("\n").map((p) => <p>{p}</p>)
     // debugger
     return (
@@ -30,7 +31,8 @@ class Article extends Component {
   }
 }
 const mapStateToProps = ({entities, ui}) => ({
-  article: entities.articles[ui.currArticle]
+  article: entities.articles[ui.currArticle],
+  loading: ui.loading
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchArticle(id))
