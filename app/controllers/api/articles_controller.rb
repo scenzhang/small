@@ -4,6 +4,9 @@ class Api::ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user_id = current_user.id
+    # if @article.blurb.empty?
+    #   @article.blurb = 
+    # end
     if @article.save
       render "api/articles/show"
     else

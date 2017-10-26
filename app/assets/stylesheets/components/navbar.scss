@@ -19,3 +19,13 @@ nav {
   margin: 0 auto;
   font-size: 35px;
 }
+
+
+.loggedOutNav {
+  display: flex;
+  /* padding: 4px; */
+}
+
+.loggedOutNav a {
+  margin: 5px 10px;
+}

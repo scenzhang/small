@@ -17,13 +17,14 @@ class Article extends Component {
   }
   render() {
     let article = this.props.article || { body: "" };
+    let articlePs = article.body.split("\n").map((p) => <p>{p}</p>)
     // debugger
     return (
       <div>
       <h1> {article.title} </h1>
       <h2> by {article.author} </h2>
       <h3>{article.blurb}</h3>
-      <p> {article.body} </p>
+      {articlePs}
       </div>
     );
   }

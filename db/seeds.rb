@@ -5,3 +5,29 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+10.times do
+  name = Faker::WorldOfWarcraft.unique.hero
+  email_name = name.split(" ").first.downcase.gsub(/[^0-9a-z]/i, '')
+  email = "#{email_name}@wow.com"
+  User.create!(
+    name: name,
+    email: email,
+    blurb: Faker::Lorem.sentence,
+    password: "asdfasdf"
+  )
+end
+
+Article.destroy_all
+10.times do
+  a = Article.new(
+    title: Faker::Hipster.unique.sentence(6),
+    body: Faker::Lorem.paragraphs(6).join("\n"),
+    user_id: User.all.sample.id            
+  )
+  if [true, false].sample
+    a.blurb = Faker::LeagueOfLegends.quote
+  end
+  a.save!
+end

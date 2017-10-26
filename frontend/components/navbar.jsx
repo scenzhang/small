@@ -22,9 +22,9 @@ class NavBar extends React.Component {
         :
         (
           <nav className="logged-out right-nav">
-            <Link className="hoverable" to="signup" onClick={this.props.clearErrors}>Sign Up</Link>
+            <Link className="hoverable" to="/signup" onClick={this.props.clearErrors}>Sign Up</Link>
             <br />
-            <Link className="hoverable" to="login" onClick={this.props.clearErrors}>Log In</Link>
+            <Link className="hoverable" to="/login" onClick={this.props.clearErrors}>Log In</Link>
           </nav>
         )
     }
