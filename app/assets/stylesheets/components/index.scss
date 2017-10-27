@@ -25,26 +25,34 @@
   
 }
 .preview-text {
-  padding: 0 10px;
+  padding: 16px;
+}
+.preview-details {
+  margin: 5px;
+
+  color: rgba(0,0,0,0.54);
 }
 .article-title {
   color: #000;
-  font-size: 25px;
+  font-size: 21px;
   font-weight: 600;
 }
 
 .article-blurb {
   color: rgba(0,0,0,0.6);
+  margin-top: 5px;
 }
 .preview-bottom {
   color: rgba(0,0,0,0.8);
   font-size: 16px;
   justify-content: space-between;
   position: absolute;
-  bottom: 0;
-
+  bottom: 16px;
+  font-size: 15px;
 }
 .divider:after {
   content: '\00B7';
 }
-
+.reading-time:after {
+  content: attr(title)
+}

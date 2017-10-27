@@ -6,15 +6,30 @@ import { createArticle, fetchArticle, updateArticle } from '../../actions/articl
 import ReactDOM from 'react-dom';
 import Textarea from 'react-textarea-autosize';
 import Errors from '../errors'
+import { isEqual } from 'lodash';
 
 class ArticleForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { title: "", body: "", redirect: false, id: this.props.article ? this.props.article.id : null };
+    this.state = {
+      title: "",
+      body: "",
+      redirect: false,
+      id: this.props.article ? this.props.article.id : null,
+      submitDisabled: true,
+      titleInvalid: false,
+      bodyInvalid: false
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillUpdate(_, nextState) {
+    let submitDisabled = !nextState.title || !nextState.body;
+    if (!isEqual(this.state, nextState)) {
+      this.setState( { submitDisabled })
+    }
+  }
   componentDidMount() {
     const { match: { path, params: { articleId } }, article, fetchArticle } = this.props
     if (path.includes("edit")) {
@@ -34,13 +49,16 @@ class ArticleForm extends Component {
   handleChange(field) {
     return (e) => {
       this.setState({ [field]: e.target.value });
+
     }
   }
+
+
   handleSubmit(e) {
     e.preventDefault();
     // debugger
-    this.props.action(this.state).then((res)=> {
-  
+    this.props.action(this.state).then((res) => {
+
       this.setState({ redirect: true, id: res.article.id }); //set the id with response so we can correctly redirect
     });
 
@@ -55,7 +73,7 @@ class ArticleForm extends Component {
         <Errors errors={this.props.errors} />
         <form className="article-form">
           <Textarea
-          autoFocus
+            autoFocus
             type="text"
             className="title-field"
             placeholder="Title"
@@ -68,7 +86,12 @@ class ArticleForm extends Component {
             className="body-field"
             onChange={this.handleChange('body')}
             value={this.state.body} />
-          <button onClick={this.handleSubmit}>Publish</button>
+          <button
+            onClick={this.handleSubmit}
+            disabled={this.state.submitDisabled}
+          >
+            Publish
+          </button>
         </form>
       </div>
     );

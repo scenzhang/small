@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
   
+  def ensure_logged_in
+    unless logged_in?
+      render(json: { error: "must be logged in" }, status: 401) && return
+    end
+  end
+  
   def login(user)
     user.reset_session_token
     session[:session_token] = user.session_token

@@ -48,7 +48,7 @@ class Article extends Component {
           <span className="date">{dateStr(article.date)}</span>
           <h2>{article.blurb}</h2>
         </div>
-        <div className="article-body">
+        <div className="article-body serif">
           {articlePs}
         </div>
       </div>

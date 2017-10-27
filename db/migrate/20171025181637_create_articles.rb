@@ -3,7 +3,7 @@ class CreateArticles < ActiveRecord::Migration[5.1]
     create_table :articles do |t|
       t.string :title, null: false
       t.text :body, null: false
-      t.string :blurb, null: false
+      t.string :blurb
       t.integer :user_id, null: false
       
       t.timestamps

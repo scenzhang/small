@@ -38,7 +38,7 @@ button {
     padding: 5px 12px;
     font-family: Roboto;
     height: 30px;
-    width: 60px;
+    width: fit-content;
     cursor: pointer;
 }
 
@@ -57,9 +57,10 @@ button:disabled {
     border: 1px solid rgb(3, 168, 124);
     border-radius: 5px;
     font-family: Roboto;
-    padding: 0px 12px;
+    padding: 4px 12px;
     height: 30px;
-    vertical-align: middle;
+    width: fit-content;
+    line-height: 30px;
     cursor: pointer;
     color: rgb(3, 168, 124);    
 }

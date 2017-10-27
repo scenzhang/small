@@ -10,7 +10,7 @@ import ArticleForm from './articles/article_form';
 const App = () => (
   <div className="app">
     <header>
-      <Route path="/" component={NavBar}></Route>
+      <Route path="/:route?/:id?/:mode?" component={NavBar}></Route>
     </header>
 
     <AuthRoute path="/login" component={LoginForm} />
