@@ -23,7 +23,7 @@ Article.destroy_all
 10.times do
   a = Article.new(
     title: Faker::Hipster.unique.sentence(6),
-    body: Faker::Lorem.paragraphs(6).join("\n"),
+    body: Faker::Lorem.paragraphs(20, 10).join("\n"),
     user_id: User.all.sample.id            
   )
   if [true, false].sample
