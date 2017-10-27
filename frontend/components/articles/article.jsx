@@ -10,12 +10,9 @@ class Article extends Component {
   constructor(props) {
     super(props);
     this.state = { dropdownHidden: true, redirToIndex: false };
-    this.handleDropdownClick = this.handleDropdownClick.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
-  handleDropdownClick() {
-    this.setState({ dropdownHidden: !this.state.dropdownHidden });
-  }
+
   handleDelete() {
     this.props.deleteArticle(this.props.article.id).then(() => this.setState({ redirToIndex: true }));
 
@@ -34,20 +31,17 @@ class Article extends Component {
     if (this.props.loading || !article.body) return <div>loading...</div>;
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
     return (
-      <div className="fill-container">
       <div className="article-container">
         <div className="article-heading">
           <h1> {article.title} </h1>
           <h3>by {article.author} </h3>
           {this.props.currUID === this.props.article.user_id ? //only show dropdown if logged in as owner (change when bookmarks added)
-            <div><DropdownButton className="dropdown-button" onClick={this.handleDropdownClick} />
-              <div className={`dropdown ${this.state.dropdownHidden ? 'hidden' : ''}`}>
-                <ul>
-                  <li> <Link to={`${this.props.match.url}/edit`}>Edit</Link> </li>
-                  <li><a className="delete-article" onClick={this.handleDelete}> Delete </a></li>
-                </ul>
-              </div>
-            </div>
+            <DropdownButton 
+            className="dropdown-button" 
+            opts={[<li key="edit"> <Link to={`${this.props.match.url}/edit`}>Edit</Link> </li>,
+            <li key="delete"><a className="delete-article" onClick={this.handleDelete}> Delete </a></li>]}
+             />
+
             :
             <div />
           }
@@ -57,7 +51,6 @@ class Article extends Component {
         <div className="article-body">
           {articlePs}
         </div>
-      </div>
       </div>
     );
   }

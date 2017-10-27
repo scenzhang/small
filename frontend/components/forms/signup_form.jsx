@@ -64,70 +64,72 @@ class SignupForm extends Component {
     if (this.props.loggedIn) return (<Redirect to='/' />);
     // const errorLis = this.props.errors.map((error) => <li>{error}</li>);
     return (
-      <div className="signup-div">
-        <Errors errors={this.props.errors}/>
-        <h1 className="serif heading">Join Small.</h1>
-        <h2 className="subheading">Create an account to personalize your homepage,
+      <div className="wrapper">
+        <div className="signup-div">
+          <Errors errors={this.props.errors} />
+          <h1 className="serif heading">Join Small.</h1>
+          <h2 className="subheading">Create an account to personalize your homepage,
           follow your favorite authors and publications,
           applaud stories you love, and more.
 
         </h2>
-        <form className="user-form">
+          <form className="user-form">
 
-          <label>Name</label>
-          <input
-            type="text"
-            value={this.state.name}
-            onChange={this.handleInput('name')}
-          />
-
-
-
-          <label>Email </label>
-          <input
-            type="text"
-            onChange={this.handleEmailInput}
-            value={this.state.email}
-            className={this.state.emailValid ? "emailInput" : "invalid"}
-          />
-          <span>{this.state.emailValid ? "" : "invalid email"}</span>
-
-
-          <label>Password </label>
-          <input
-            type="password"
-            onChange={this.handleInput('password')}
-            value={this.state.password}
-            className={this.state.pwValidLen && this.state.pwMatch ? "" : "invalid"}
-          />
-          <span>{this.state.pwValidLen ? "" : "password too short"}</span>
-
-          <label>Confirm password</label>
-          <input
-            type="password"
-            onChange={this.handleInput('pwConfirm')}
-            value={this.state.pwConfirm}
-            className={this.state.pwMatch ? "" : "invalid"}
-          />
-          <span>{this.state.pwMatch ? "" : "passwords don't match"}</span>
-          <label>About you </label>
-          <Textarea
-            onChange={this.handleInput('blurb')}
-            className={this.state.blurbTooLong ? "invalid" : ""}
-            value={this.state.blurb}
-            onKeyDown={(e) => { if (e.which === 13) e.preventDefault()} } //disable newlines in about me
-          >
-          </Textarea>
-          
-          <span className="chars-left">{140-this.state.blurb.length}</span>
+            <label>Name</label>
+            <input
+              type="text"
+              value={this.state.name}
+              onChange={this.handleInput('name')}
+            />
 
 
 
-          <button className='submit' disabled={this.state.buttonDisabled} onClick={this.handleSubmit}> Sign Up</button>
+            <label>Email </label>
+            <input
+              type="text"
+              onChange={this.handleEmailInput}
+              value={this.state.email}
+              className={this.state.emailValid ? "emailInput" : "invalid"}
+            />
+            <span>{this.state.emailValid ? "" : "invalid email"}</span>
 
-        </form>
-        <div className="login-link">Already have an account? <Link to="login" onClick={this.props.clearErrors}>Log in.</Link></div>
 
+            <label>Password </label>
+            <input
+              type="password"
+              onChange={this.handleInput('password')}
+              value={this.state.password}
+              className={this.state.pwValidLen && this.state.pwMatch ? "" : "invalid"}
+            />
+            <span>{this.state.pwValidLen ? "" : "password too short"}</span>
+
+            <label>Confirm password</label>
+            <input
+              type="password"
+              onChange={this.handleInput('pwConfirm')}
+              value={this.state.pwConfirm}
+              className={this.state.pwMatch ? "" : "invalid"}
+            />
+            <span>{this.state.pwMatch ? "" : "passwords don't match"}</span>
+            <label>About you </label>
+            <Textarea
+              onChange={this.handleInput('blurb')}
+              className={this.state.blurbTooLong ? "invalid" : ""}
+              value={this.state.blurb}
+              onKeyDown={(e) => { if (e.which === 13) e.preventDefault() }} //disable newlines in about me
+            >
+            </Textarea>
+
+            <span className="chars-left">{140 - this.state.blurb.length}</span>
+
+
+
+            <button className='submit' disabled={this.state.buttonDisabled} onClick={this.handleSubmit}> Sign Up</button>
+
+          </form>
+          <div className="login-link">Already have an account? <Link to="login" onClick={this.props.clearErrors}>Log in.</Link></div>
+
+        </div>
       </div>
     );
   }
@@ -143,9 +145,9 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 
-const mapDispatchToProps = (dispatch, { location}) => ({
+const mapDispatchToProps = (dispatch, { location }) => ({
   signup: (user) => dispatch(sessionActions.signup(user)),
-  clearErrors: ()=>dispatch(sessionActions.clearErrors())
+  clearErrors: () => dispatch(sessionActions.clearErrors())
 
 });
 

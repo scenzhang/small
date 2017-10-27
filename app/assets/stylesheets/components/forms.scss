@@ -52,7 +52,10 @@ input:focus, textarea:focus {
 .heading {
     margin: 0;
 }
-
+.wrapper {
+    height: 100vh;
+    background-color: #f0f0f0;
+}
 .login-div,
 .login-div input {
     background-color: #D7EFEE;

@@ -30,35 +30,37 @@ class LoginForm extends Component {
     if (this.props.loggedIn) return (<Redirect to='/' />);
     // const errorLis = this.props.errors.map((error) => <li>{error}</li>);
     return (
-      <div className="login-div">
-        <Errors errors={this.props.errors}/>
-        <h1 className="serif heading">Welcome back.</h1>
-        <h2 className="subheading">Sign in to access your personalized homepage, follow 
+      <div className="wrapper">
+        <div className="login-div">
+          <Errors errors={this.props.errors} />
+          <h1 className="serif heading">Welcome back.</h1>
+          <h2 className="subheading">Sign in to access your personalized homepage, follow
           authors and topics you love, and clap for stories that matter to you.
-        
-    
+
+
         </h2>
-        <form className="user-form">
-          <label>Email </label> <br />
-          <input
-            type="text"
-            onChange={this.handleInput('email')}
-            value={this.state.email}
-          />
-          <br />
-          <label>Password </label> <br />
-          <input
-            type="password"
-            onChange={this.handleInput('password')}
-            value={this.state.password}
-          />
-          <br />
+          <form className="user-form">
+            <label>Email </label> <br />
+            <input
+              type="text"
+              onChange={this.handleInput('email')}
+              value={this.state.email}
+            />
+            <br />
+            <label>Password </label> <br />
+            <input
+              type="password"
+              onChange={this.handleInput('password')}
+              value={this.state.password}
+            />
+            <br />
 
-          <button onClick={this.handleSubmit} > Log In </button>
+            <button onClick={this.handleSubmit} > Log In </button>
 
-        </form>
-        <div className="signup-link">Are you new to Small? <Link to="signup" onClick={this.props.clearErrors}>Sign up.</Link></div>
+          </form>
+          <div className="signup-link">Are you new to Small? <Link to="signup" onClick={this.props.clearErrors}>Sign up.</Link></div>
 
+        </div>
       </div>
     );
   }
@@ -74,10 +76,10 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 
-const mapDispatchToProps = (dispatch, { location}) => ({
+const mapDispatchToProps = (dispatch, { location }) => ({
   login: (user) => dispatch(sessionActions.login(user)),
-  clearErrors: ()=>dispatch(sessionActions.clearErrors())
-  
+  clearErrors: () => dispatch(sessionActions.clearErrors())
+
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginForm));

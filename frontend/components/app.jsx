@@ -8,7 +8,7 @@ import ArticleIndex from './articles/article_index';
 import Article from './articles/article';
 import ArticleForm from './articles/article_form';
 const App = () => (
-  <div>
+  <div className="app">
     <header>
       <Route path="/" component={NavBar}></Route>
     </header>

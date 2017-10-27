@@ -5,7 +5,12 @@ class Article < ApplicationRecord
   
   def ensure_blurb
     if self.blurb.nil? || self.blurb.empty? 
-      self.blurb = "#{self.body[0...140]}..."
+      sentences = self.body.split(".")
+      self.blurb = ""
+      sentences.each do |s|
+        break if self.blurb.length > 140
+        self.blurb += "#{s}"
+      end
     end
   end
 end
