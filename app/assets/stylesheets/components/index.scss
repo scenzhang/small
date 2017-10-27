@@ -17,6 +17,8 @@
   position: relative;
   display: flex;
   padding: 0;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: none;
 }
 .preview-text {
   padding: 0 10px;
@@ -41,3 +43,4 @@
 .divider:after {
   content: '\00B7';
 }
+
