@@ -5,7 +5,7 @@ function ArticlePreview({ article }) {
   let date = dateStr(article.date)
   return (
     <li className='article-preview' key={article.id}>
-      <div className='preview-div'>
+      <div className='preview-container'>
       <Link to={`/articles/${article.id}`}>
         
         <div className='article-img'>

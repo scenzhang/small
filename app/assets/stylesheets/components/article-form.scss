@@ -1,0 +1,21 @@
+.article-form {
+  display: flex;
+  flex-direction: column;
+  // margin: 0 auto;
+}
+.form-container {
+  margin: 0 auto;
+  padding: 20px 70px
+}
+.title-field {
+  font-size: 40px;
+}
+.body-field {
+  height: 500px;
+  
+}
+
+.article-form textarea {
+  margin: 20px 30px;
+  
+}

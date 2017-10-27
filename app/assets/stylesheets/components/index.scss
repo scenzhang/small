@@ -1,16 +1,19 @@
-.index-div {
+.index {
   background-color: #fff;
-  margin: 0;
+  margin: 0 auto;
   width: 100%;
 }
-
+.article-preview {
+  margin: 0 auto;
+}
 .article-img {
   min-height: 100%;
   width: 140px;
   background-image: image_url("article-placeholder-img.png");
   background-repeat: repeat;
 }
-.preview-div {
+.preview-container {
+  margin: 0 auto;
   margin-bottom: 10px;
   width: 500px;
   height: 260px;
@@ -19,6 +22,7 @@
   padding: 0;
   border: 1px solid rgba(0,0,0,0.1);
   box-shadow: none;
+  
 }
 .preview-text {
   padding: 0 10px;

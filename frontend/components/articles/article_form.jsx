@@ -51,10 +51,11 @@ class ArticleForm extends Component {
     }
     if (this.state.redirect) return <Redirect to={`/articles/${this.state.id}`} />
     return (
-      <div>
+      <div className="form-container">
         <Errors errors={this.props.errors} />
         <form className="article-form">
           <Textarea
+          autoFocus
             type="text"
             className="title-field"
             placeholder="Title"
@@ -62,6 +63,7 @@ class ArticleForm extends Component {
             value={this.state.title}
           />
           <Textarea
+            minRows={30}
             placeholder="Tell your story..."
             className="body-field"
             onChange={this.handleChange('body')}
