@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import * as sessionActions from '../actions/session_actions';
 
 class NavBar extends React.Component {
-
+  demoLogin() {
+    this.props.clearErrors();
+    this.props.demoLogin();
+  }
   render() {
     let rightNav = null;
     if (this.props.location.pathname != '/login' && this.props.location.pathname != '/signup') {
@@ -23,8 +26,8 @@ class NavBar extends React.Component {
         :
         (
           <nav className="logged-out right-nav">
+            <div className="hoverable" onClick={this.demoLogin.bind(this)}>Demo</div>
             <Link className="hoverable" to="/signup" onClick={this.props.clearErrors}>Sign Up</Link>
-            <br />
             <Link className="hoverable" to="/login" onClick={this.props.clearErrors}>Log In</Link>
           </nav>
         )
@@ -50,7 +53,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ( {
   logout: () => dispatch(sessionActions.logout()),
-  clearErrors: () => dispatch(sessionActions.clearErrors())
+  clearErrors: () => dispatch(sessionActions.clearErrors()),
+  demoLogin: ()=> dispatch(sessionActions.login({email:"demo@small.com", password:"asdfasdf"}))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
