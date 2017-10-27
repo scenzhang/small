@@ -9,6 +9,15 @@
   background-color: #fff
 }
 
+.heading-author {
+  font-size: 16px;
+}
+
+.heading-blurb {
+  font-size: 16px;
+  color: rgba(0,0,0,.50);  
+}
+
 .article-heading {
   display: flex;
   flex-direction: column;
@@ -16,11 +25,6 @@
 .article-container h1 {
   font-size: 40px;
 }
-.article-container h2 {
-  font-size: 30px;
-  color: rgba(0,0,0,.50);
-}
-
 .delete-article {
   color: rgba(255, 0, 0, 0.445);
   cursor: pointer;

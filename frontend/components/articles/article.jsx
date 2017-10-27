@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom';
 import { fetchArticle, deleteArticle } from '../../actions/article_actions';
-import dateStr from '../../util/date_str'
+import ArticleDateReadtime from './date_readtime';
 import DropdownButton from './article-dropdown'
 class Article extends Component {
   constructor(props) {
@@ -33,8 +33,9 @@ class Article extends Component {
     return (
       <div className="article-container">
         <div className="article-heading">
+          <h3 className="heading-author">{article.author} </h3>
+          <ArticleDateReadtime date={article.date} time={article.time}/>
           <h1> {article.title} </h1>
-          <h3>by {article.author} </h3>
           {this.props.currUID === this.props.article.user_id ? //only show dropdown if logged in as owner (change when bookmarks added)
             <DropdownButton 
             className="dropdown-button" 
@@ -45,8 +46,7 @@ class Article extends Component {
             :
             <div />
           }
-          <span className="date">{dateStr(article.date)}</span>
-          <h2>{article.blurb}</h2>
+          <h2 className="heading-blurb serif">{article.blurb}</h2>
         </div>
         <div className="article-body serif">
           {articlePs}

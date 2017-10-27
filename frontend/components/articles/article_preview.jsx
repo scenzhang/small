@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import dateStr from '../../util/date_str'
+import ArticleDateReadtime from './date_readtime';
 function ArticlePreview({ article }) {
   let date = dateStr(article.date)
   return (
@@ -19,9 +20,7 @@ function ArticlePreview({ article }) {
         </Link>
         <div className="preview-bottom">
         <div className="article-author">by {article.author}</div>
-          <div className="preview-details">
-            <span>{date}</span> <span className="divider"></span> <span className="reading-time" title={`${article.time} min read`}></span>
-          </div>
+          <ArticleDateReadtime date={article.date} time={article.time}/>
         </div>
         </div>
       </div>

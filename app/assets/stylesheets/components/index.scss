@@ -28,10 +28,10 @@
   padding: 16px;
 }
 .preview-details {
-  margin: 5px;
 
   color: rgba(0,0,0,0.54);
 }
+
 .article-title {
   color: #000;
   font-size: 21px;
@@ -52,6 +52,9 @@
 }
 .divider:after {
   content: '\00B7';
+}
+.divider {
+  padding: 6.5px;
 }
 .reading-time:after {
   content: attr(title)

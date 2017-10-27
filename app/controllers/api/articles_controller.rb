@@ -43,11 +43,7 @@ class Api::ArticlesController < ApplicationController
     params.require(:article).permit(:title, :body, :blurb)
   end
 
-  def ensure_logged_in
-    unless logged_in?
-      render(json: { error: "must be logged in" }, status: 401) && return
-    end
-  end
+
 
   
 end

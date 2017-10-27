@@ -6,11 +6,15 @@ nav {
 .right-nav {
   vertical-align: middle;
 }
+.right-nav .hoverable {
+  margin: 0 5px;
+}
 
 .main-nav {
   border-bottom: 1px solid rgb(214, 209, 209);
   background-color: white;
   padding: 20px;
+  line-height: 30px;
 
 }
 
