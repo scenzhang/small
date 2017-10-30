@@ -58,7 +58,7 @@ class Article extends Component {
         <div className="article-body serif">
           {articlePs}
         </div>
-        <ResponseForm id={article.id} isResponse={this.props.match.url.includes("response")}/>
+        <ResponseForm id={article.id} articleId={this.props.articleId} isResponse={this.props.match.url.includes("response")}/>
             <ResponseList id={article.id} isResponse={this.props.match.url.includes("response")}/>
       </div>
     );
@@ -67,7 +67,9 @@ class Article extends Component {
 const mapStateToProps = ({ entities, ui, session }) => ({
   article: entities.articles[ui.currArticle],
   loading: ui.article_loading,
-  currUID: session.currentUser ? session.currentUser.id : null
+  currUID: session.currentUser ? session.currentUser.id : null,
+  articleId: ui.currArticle
+  
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchArticle(id)),
@@ -76,7 +78,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToResponse = ({entities, ui, session }, ownProps) => ({
   article: entities.responses[ownProps.match.params.id],
-  currUID: session.currentUser ? session.currentUser.id : null
+  currUID: session.currentUser ? session.currentUser.id : null,
+  articleId: ui.currArticle
 });
 
 const mapDispatchToResponse = (dispatch) => ({

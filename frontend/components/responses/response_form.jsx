@@ -33,17 +33,19 @@ class ResponseForm extends Component {
     this.setState({body: e.currentTarget.value});
   }
   handleSubmit() {
-    this.props.createResponse({body: this.state.body, article_id: this.props.articleId});
+    // debugger
+    const newResp = {body: this.state.body, article_id: this.props.articleId};
+    if (this.isResponse) newResp.parent_response_id = this.props.id;
+    this.props.createResponse(newResp);
     this.setState({body: ""})
   }
   render() {
     return (
       <div className="response-form-container" onClick={this.handleClick}>
+          { this.state.formHidden ?
           <div className={`serif ${this.state.formHidden ? "" : "hidden"}`} onClick={this.handleClick}>
             Write a response...
           </div>
-          { this.state.formHidden ?
-          <div/>
           :
           <form className={`response-form serif` } >
               <Textarea value={this.state.body} onChange={this.handleChange} autoFocus/>
