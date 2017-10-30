@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { fetchArticle, deleteArticle } from '../../actions/article_actions';
 import ArticleDateReadtime from './date_readtime';
 import DropdownButton from '../dropdown'
+import { fetchResponse, deleteResponse } from '../../actions/response_actions';
 import ResponseList from '../responses/response_list'
 import ResponseForm from '../responses/response_form'
 class Article extends Component {
@@ -17,22 +18,24 @@ class Article extends Component {
 
   handleDelete() {
     this.props.deleteArticle(this.props.article.id).then(() => this.setState({ redirToIndex: true }));
-
+    
   }
 
   componentDidMount() {
-    this.props.fetchArticle(this.props.match.params.articleId);
+    if (!this.props.article) this.props.fetchArticle(this.props.match.params.id);
+    
   }
   componentWillReceiveProps(nextProps) {
-    if (this.props.match.params.articleId != nextProps.match.params.articleId) {
-      this.props.fetchArticle(nextProps.match.params.articleId);
+    if ( this.props.match.url.includes('article') &&
+      this.props.match.params.id != nextProps.match.params.id) {
+      this.props.fetchArticle(nextProps.match.params.id);
     }
   }
   render() {
     if (this.state.redirToIndex) return <Redirect to="/" />;
     let article = this.props.article || { body: "" };
-    // debugger
-    if (this.props.loading || !article.body) return <div>loading...</div>;
+
+    if (!article.body) return <div>loading...</div>;
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
     return (
       <div className="article-container">
@@ -55,8 +58,8 @@ class Article extends Component {
         <div className="article-body serif">
           {articlePs}
         </div>
-        <ResponseForm articleId={article.id}/>
-            <ResponseList articleId={article.id}/>
+        <ResponseForm id={article.id} isResponse={this.props.match.url.includes("response")}/>
+            <ResponseList id={article.id} isResponse={this.props.match.url.includes("response")}/>
       </div>
     );
   }
@@ -71,6 +74,15 @@ const mapDispatchToProps = (dispatch) => ({
   deleteArticle: (id) => dispatch(deleteArticle(id))
 });
 
+const mapStateToResponse = ({entities, ui, session }, ownProps) => ({
+  article: entities.responses[ownProps.match.params.id],
+  currUID: session.currentUser ? session.currentUser.id : null
+});
 
+const mapDispatchToResponse = (dispatch) => ({
+  fetchArticle: (id) => dispatch(fetchResponse(id)),
+  deleteArticle: (id) => dispatch(deleteResponse(id))
+})
+export const Response = withRouter(connect(mapStateToResponse, mapDispatchToResponse)(Article));
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Article));

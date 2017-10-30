@@ -8,6 +8,21 @@ class Response < ApplicationRecord
   has_many :responses, foreign_key: :parent_response_id
 
   # include Respondable
-  
+  def gen_tree
+    to_visit = []
+    tree = []
+    self.responses.each do |res|
+      tree << res
+      to_visit += res.responses
+      until to_visit.empty?
+        curr = to_visit.pop
+        to_visit += curr.responses
+        tree << curr
+
+      end
+      
+    end
+    tree
+  end
   
 end

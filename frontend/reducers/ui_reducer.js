@@ -17,6 +17,7 @@ import loading from './loading_reducer'
 
 const UIReducer = (state = {}, action) => {
   let newState = merge({}, state);
+  newState.currResponses = [];
   switch (action.type) {
     case LOAD_ALL_ARTICLES:
       newState.article_loading = true;

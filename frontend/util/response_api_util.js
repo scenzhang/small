@@ -1,6 +1,13 @@
 export const fetchResponses = (articleId) => {
   return $.ajax({url:`api/articles/${articleId}/responses`});
 }
+export const fetchResponse = (id) => {
+  return $.ajax({url:`api/responses/${id}`});
+}
+
+export const fetchReplies = (id) => {
+  return $.ajax({url: `api/responses/${id}/replies`});
+}
 
 export const createResponse = response => $.ajax({
   url: `api/responses`,

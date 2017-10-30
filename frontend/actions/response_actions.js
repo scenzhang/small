@@ -7,7 +7,7 @@ export const REMOVE_RESPONSE = "REMOVE_RESPONSE";
 export const LOAD_RESPONSE = "LOAD_RESPONSE";
 export const LOAD_RESPONSES = "LOAD_RESPONSES";
 export const RECEIVE_RESPONSE_ERRORS = "RECEIVE_RESPONSE_ERRORS";
-
+export const FETCH_REPLIES = "FETCH_REPLIES"
 export const loadResponse = () => ({ type: LOAD_RESPONSE });
 
 export const loadResponses = () => ({ type: LOAD_RESPONSES });
@@ -23,12 +23,19 @@ export const receiveResponses = (responses) => ({
   type: RECEIVE_RESPONSES, responses
 });
 
-// export const fetchResponse = (id) => (dispatch) => {
-//   dispatch(loadResponse());
-//   return ResponseUtil.fetchResponse(id).then(
-//     (response) => dispatch(receiveResponse(response))
-//   );
-// };
+export const fetchReplies = (id) => (dispatch) => {
+  dispatch(loadResponses());
+  return ResponseUtil.fetchReplies(id).then(
+    (responses) => dispatch(receiveResponses(responses))
+  );
+}
+
+export const fetchResponse = (id) => (dispatch) => {
+  dispatch(loadResponse());
+  return ResponseUtil.fetchResponse(id).then(
+    (response) => dispatch(receiveResponse(response))
+  );
+};
 
 export const receiveResponse = (response) => ({
   type: RECEIVE_RESPONSE, response
