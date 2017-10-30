@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 import ReactDOM from 'react-dom';
 import { fetchArticle, deleteArticle } from '../../actions/article_actions';
 import ArticleDateReadtime from './date_readtime';
-import DropdownButton from './article-dropdown'
+import DropdownButton from '../dropdown'
+import ResponseList from '../responses/response_list'
+import ResponseForm from '../responses/response_form'
 class Article extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +19,7 @@ class Article extends Component {
     this.props.deleteArticle(this.props.article.id).then(() => this.setState({ redirToIndex: true }));
 
   }
+
   componentDidMount() {
     this.props.fetchArticle(this.props.match.params.articleId);
   }
@@ -28,6 +31,7 @@ class Article extends Component {
   render() {
     if (this.state.redirToIndex) return <Redirect to="/" />;
     let article = this.props.article || { body: "" };
+    // debugger
     if (this.props.loading || !article.body) return <div>loading...</div>;
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
     return (
@@ -51,18 +55,22 @@ class Article extends Component {
         <div className="article-body serif">
           {articlePs}
         </div>
+        <ResponseForm articleId={article.id}/>
+            <ResponseList articleId={article.id}/>
       </div>
     );
   }
 }
 const mapStateToProps = ({ entities, ui, session }) => ({
   article: entities.articles[ui.currArticle],
-  loading: ui.loading,
+  loading: ui.article_loading,
   currUID: session.currentUser ? session.currentUser.id : null
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchArticle(id)),
   deleteArticle: (id) => dispatch(deleteArticle(id))
 });
+
+
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Article));

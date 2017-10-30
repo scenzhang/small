@@ -7,16 +7,7 @@ class Response < ApplicationRecord
              optional: true
   has_many :responses, foreign_key: :parent_response_id
 
-  def all_children
-    if self.responses.empty?
-      return []
-    end
-    children = []
-    self.responses.each do |res|
-      children << res
-      children << res.all_children
-    end
-    children.flatten
-  end
-
+  # include Respondable
+  
+  
 end
