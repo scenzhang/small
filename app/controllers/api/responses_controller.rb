@@ -37,7 +37,7 @@ class Api::ResponsesController < ApplicationController
 
   def response_params
     params.require(:response)
-      .permit(:body, :user_id, :article_id, :parent_response_id)
+      .permit(:body, :article_id, :parent_response_id)
   end
 
 end

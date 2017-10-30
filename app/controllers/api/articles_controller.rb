@@ -1,5 +1,5 @@
 class Api::ArticlesController < ApplicationController
-  before_action :ensure_logged_in, except: %i(index show)
+  before_action :ensure_logged_in, except: %i(index show responses)
 
   def create
     @article = Article.new(article_params)
@@ -35,6 +35,12 @@ class Api::ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.destroy
     render "api/articles/show"                                
+  end
+
+  def responses
+    article = Article.find(params[:id])
+    @responses = article.responses
+    render "api/responses/index"
   end
 
   private
