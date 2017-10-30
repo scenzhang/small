@@ -32,3 +32,59 @@ Article.destroy_all
   end
   a.save!
 end
+
+Response.destroy_all
+#level 0
+level0 = []
+10.times do
+  r = Response.new(
+    user_id: User.all.sample.id,
+    article_id: Article.all.sample.id,
+    body: "level 0 response"            
+  )
+  r.save!
+  level0 << [r.id, r.article_id]
+end
+
+#level 1
+level1 = []
+10.times do
+  parent = level0.sample
+  r = Response.new(
+    user_id: User.all.sample.id,
+    article_id: parent[1],
+    parent_response_id: parent[0],
+    # parent_response_id: Response.first.id,
+    body: "level 1 response"
+  )
+  r.save!
+  level1 << [r.id, r.article_id]
+
+end
+
+#level 2
+level2 = []
+10.times do
+  parent = level1.sample
+  r = Response.new(
+    user_id: User.all.sample.id,
+    article_id: parent[1],
+    parent_response_id: parent[0],
+    body: "level 2 response"
+  )
+  r.save!
+  level2 << [r.id, r.article_id]
+
+end
+
+10.times do
+  parent = level2.sample
+  r = Response.new(
+    user_id: User.all.sample.id,
+    article_id: parent[1],
+    parent_response_id: parent[0],
+    body: "level 3 response"
+  )
+  r.save!
+
+end

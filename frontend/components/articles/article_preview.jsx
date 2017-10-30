@@ -16,7 +16,7 @@ function ArticlePreview({ article }) {
         <div className="preview-text">
         <Link to={`/articles/${article.id}`}>
           <h1 className="article-title">{article.title}</h1>
-          <div className="article-blurb">{article.blurb}</div>
+          <div className="article-blurb">{article.blurb}{article.realBlurb ? "" : "..." }</div>
         </Link>
         <div className="preview-bottom">
         <div className="article-author">by {article.author}</div>
