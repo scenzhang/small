@@ -22,6 +22,10 @@ class ResponseForm extends Component {
   }
   handleClick(e) {
     e.preventDefault();
+    if (!this.props.loggedIn) {
+      this.props.history.push(`/login?redirect=${this.props.location.pathname}`);
+      return;
+    }
     this.setState({ formHidden: false });
 
   }
@@ -64,5 +68,5 @@ const mapStateToProps = ({session: {currentUser }}) => ({
 const mapDispatchToProps = (dispatch) => ({
   createResponse: (resp) => dispatch(createResponse(resp))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(ResponseForm));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(onClickOutside(ResponseForm)));
 // export default connect(, )(ResponseForm);

@@ -29,7 +29,9 @@ class SignupForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const redirectTo = this.props.location.search.split("=")[1] // '?redirect=/url'    
     this.props.signup(this.state);
+    this.props.history.push(redirectTo);
 
   }
 

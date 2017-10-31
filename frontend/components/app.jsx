@@ -21,6 +21,7 @@ const App = () => (
       <Route path="/articles/:id/edit" component={ArticleForm} />
       <Route exact path="/articles/:id" component={Article} />
       <Route exact path="/responses/:id" component={Response} />
+      <Route path="/responses/:id/edit" component={ArticleForm} />
     </Switch>
   </div>
 )

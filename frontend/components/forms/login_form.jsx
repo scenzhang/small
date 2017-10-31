@@ -17,7 +17,9 @@ class LoginForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const redirectTo = this.props.location.search.split("=")[1] // '?redirect=/url'
     this.props.login(this.state);
+    this.props.history.push(redirectTo);
   }
 
   handleInput(field) {

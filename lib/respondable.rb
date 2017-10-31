@@ -5,7 +5,7 @@ module Respondable
     end
     children = {}
     self.responses.each do |res|
-      children[res.id] =  res.all_children 
+      children[res.id] = res.all_children 
     end
     children
   end
