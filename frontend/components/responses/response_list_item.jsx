@@ -10,16 +10,16 @@ class _ResponseListItem extends Component {
     const responses = this.props.response.response_ids.map((id) => this.props.responses[id])
     return (
       <li key={this.props.response.id} className={`level-${this.props.level}`} >
-          {this.props.response.id}
+      <div className ="response">
           <DateReadtime date={this.props.response.date} time={this.props.response.time} />
-        <Link to={`/responses/${this.props.response.id}`}>
-          {this.props.response.body}
-        </Link>
           {this.props.response.author}
+        <Link to={`/responses/${this.props.response.id}`}>
+          <div class="response-body serif">{this.props.response.body}</div>
+        </Link>
           <ul>
             {responses.map((resp) => <ResponseListItem level={this.props.level+1} response={resp}/>)}
             </ul>
-
+      </div>
 
       </li>
     );

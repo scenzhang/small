@@ -1,0 +1,14 @@
+.response {
+  border: 1px solid rgba(0,0,0,0.09);
+}
+.responses, .response-form-container{
+  margin: 0 auto;
+  width: 55%;
+}
+.responses-container {
+  background-color: #f0f0f0;
+}
+.response-form-container {
+  display: flex;
+  flex-direction: column;
+}

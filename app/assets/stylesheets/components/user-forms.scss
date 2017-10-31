@@ -1,4 +1,4 @@
-.user-form input, .user-form textArea {
+.user-form input, .user-form textarea {
     margin: 5px;
     border-top: none;
     border-left: none;
@@ -12,7 +12,7 @@
     font-size: 16px;
     
 }
-.user-form textArea {
+.user-form textarea {
     // border-bottom: none;
     height: 75px;
     resize: none;
