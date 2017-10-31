@@ -35,7 +35,6 @@ class Article extends Component {
   render() {
     if (this.state.redirToIndex) return <Redirect to="/" />;
     let article = this.props.article || { body: "" };
-
     if (!article.body) return <div>loading...</div>;
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
     return (

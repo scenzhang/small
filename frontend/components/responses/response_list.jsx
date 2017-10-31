@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux'
 import ReactDOM from 'react-dom';
 import {fetchResponses, fetchReplies} from '../../actions/response_actions';
-
+import ResponseListItem from './response_list_item';
 class ResponseList extends Component {
   componentDidMount() {
     if (this.props.isResponse) {
@@ -25,9 +25,10 @@ class ResponseList extends Component {
 
   render() {
     if (!this.props.loaded) return <p> loading... </p>
+    // const topLevel = Object.values(this.props.responses).filter( (resp) => !resp.parent_response_id );
     return (
       <ul>
-        {this.props.responseIds.map( (id)=> {
+        { /* this.props.responseIds.map( (id)=> {
           // debugger
         return (<li key={id}>
         <Link to={`/responses/${id}`}>
@@ -37,13 +38,16 @@ class ResponseList extends Component {
         </li>)
         }
         )
-      }
+      */}
+
+      { this.props.responseIds.map( (id) => <ResponseListItem level={0} response={this.props.responses[id]}/>) }
       </ul>
     );
   }
 }
 const mapStateToProps = ({entities: {responses}, ui}) => {
-  return {responses, loaded: ui.response_loaded, responseIds: ui.currResponses };
+  return {responses, loaded: ui.response_loaded, responseIds: ui.currResponses};
+  //instead pass in the array of responses to item
 };
 const mapDispatchToProps = (dispatch) => {
   return { 

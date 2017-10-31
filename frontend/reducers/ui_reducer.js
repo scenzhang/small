@@ -27,9 +27,11 @@ const UIReducer = (state = {}, action) => {
       return newState;
     case LOAD_RESPONSES:
       newState.response_loaded = false;
+      newState.response_id = action.id;
       return newState;
     case LOAD_RESPONSE:
       newState.response_loaded = false;
+      newState.response_id = action.id;
       return newState;
     
     case RECEIVE_ARTICLE:
@@ -41,12 +43,28 @@ const UIReducer = (state = {}, action) => {
       return newState;
     case RECEIVE_RESPONSES:
       newState.response_loaded = true;
-      newState.currResponses = action.responses.map((res) => res.id);
+      newState.currResponses = [];
+      // debugger
+      action.responses.forEach((res) => {
+        // if (res.parent_response_id === null)// || !newState.currResponses.includes(res.parent_response_id))
+        //   newState.currResponses.push(res.id)
+        // debugger
+        if (res.parent_response_id == newState.response_id) {
+          newState.currResponses.push(res.id)
+        }
+      });
+      newState.currResponses.sort((a, b) => a - b);
+      
+      // newState.response_id = null;
       return newState;
     case RECEIVE_RESPONSE:
+      // debugger
       newState.response_loaded = true;
-      newState.currResponses.push(action.response.id);
+      if (action.response.parent_response_id == newState.response_id)// || !newState.currResponses.includes(action.response.parent_response_id))
+          newState.currResponses.push(action.response.id)
       newState.currArticle = action.response.article_id
+      newState.currResponses.sort((a, b) => a - b);
+      // newState.response_id = null;
       return newState;
     default:
       return state;

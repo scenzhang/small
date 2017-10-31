@@ -8,12 +8,16 @@ export const LOAD_RESPONSE = "LOAD_RESPONSE";
 export const LOAD_RESPONSES = "LOAD_RESPONSES";
 export const RECEIVE_RESPONSE_ERRORS = "RECEIVE_RESPONSE_ERRORS";
 export const FETCH_REPLIES = "FETCH_REPLIES"
-export const loadResponse = () => ({ type: LOAD_RESPONSE });
 
-export const loadResponses = () => ({ type: LOAD_RESPONSES });
+// id refers to the response for which replies are being fetched, and is null if top level responses to an article
+// are being fetched. this is used by the ui reducer to pass which top level responses to render to responselist,
+// which then recursively renders lower level responses.
+export const loadResponse = (id) => ({ type: LOAD_RESPONSE, id });
+
+export const loadResponses = (id) => ({ type: LOAD_RESPONSES, id }); 
 
 export const fetchResponses = (articleId) => (dispatch) => {
-  dispatch(loadResponses());
+  dispatch(loadResponses(null)); 
   return ResponseUtil.fetchResponses(articleId).then(
     (responses) => dispatch(receiveResponses(responses))
   );
@@ -24,14 +28,14 @@ export const receiveResponses = (responses) => ({
 });
 
 export const fetchReplies = (id) => (dispatch) => {
-  dispatch(loadResponses());
+  dispatch(loadResponses(id));
   return ResponseUtil.fetchReplies(id).then(
     (responses) => dispatch(receiveResponses(responses))
   );
 }
 
 export const fetchResponse = (id) => (dispatch) => {
-  dispatch(loadResponse());
+  dispatch(loadResponse(id));
   return ResponseUtil.fetchResponse(id).then(
     (response) => dispatch(receiveResponse(response))
   );

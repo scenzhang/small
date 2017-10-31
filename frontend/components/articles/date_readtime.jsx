@@ -10,8 +10,13 @@ function ArticleDateReadtime({ date, time }) {
   return (
     <div className="preview-details">
       <span>{dateS}</span> 
-      <span className="divider"></span> 
+      {/* only show reading time if time is not 0 */}
+      {!!time &&
+      <span>
+      <span className="divider"></span>  
       <span className="reading-time" title={`${time} min read`}></span>
+      </span>
+      }
     </div>
   )
 
