@@ -37,9 +37,8 @@ class ResponseForm extends Component {
     this.setState({body: e.currentTarget.value});
   }
   handleSubmit() {
-    // debugger
     const newResp = {body: this.state.body, article_id: this.props.articleId};
-    if (this.isResponse) newResp.parent_response_id = this.props.id;
+    if (this.props.isResponse) newResp.parent_response_id = this.props.id;
     this.props.createResponse(newResp);
     this.setState({body: ""})
   }

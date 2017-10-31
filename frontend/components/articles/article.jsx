@@ -18,6 +18,7 @@ class Article extends Component {
 
   handleDelete() {
     this.props.deleteArticle(this.props.article.id).then(() => this.setState({ redirToIndex: true }));
+    //when profiles implemented redirect to profile index instead
     
   }
 
