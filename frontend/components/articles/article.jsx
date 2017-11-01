@@ -21,6 +21,10 @@ class Article extends Component {
     //when profiles implemented redirect to profile index instead
 
   }
+  shouldComponentUpdate() { //for redirect from login
+    debugger
+    return !this.props.article || !this.props.article.body;
+  }
 
   componentDidMount() {
     if (!this.props.article) this.props.fetchArticle(this.props.match.params.id);
@@ -37,22 +41,28 @@ class Article extends Component {
   }
   render() {
     if (this.state.redirToIndex) return <Redirect to="/" />;
-    let article = this.props.article || { body: "" };
-    if (!article.body) return <div>loading...</div>;
+    if (!this.props.article) return <div>loading...</div>;
+    let article = this.props.article;
+    
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
     return (
       <div className="article-response-container">
         <div className="article-container">
           <div className="article-heading">
+            {this.props.location.pathname.includes("response") &&
+              <Link className="article-back" to={`/articles/${this.props.articleId}`}>
+                Back to article
+              </Link>
+            }
             <h3 className="heading-author">{article.author} </h3>
             <ArticleDateReadtime date={article.date} time={article.time} />
             {
-              !this.props.parentResponse || //if parent response isn't loaded don't evaluate rest
-              <Link to={`${this.props.parentId}`}>
-              <div className="parent-container">
-                <div className="parent-body">{this.props.parentResponse.body}</div>
-                <div className="parent-author">{this.props.parentResponse.author}</div>
-              </div>
+              this.props.parentResponse && //if parent response isn't loaded don't evaluate rest
+              <Link to={`/responses/${this.props.parentId}`}>
+                <div className="parent-container">
+                  <div className="parent-body">{this.props.parentResponse.body}</div>
+                  <div className="parent-author">{this.props.parentResponse.author}</div>
+                </div>
               </Link>
             }
             <h1> {article.title} </h1>
@@ -81,13 +91,15 @@ class Article extends Component {
     );
   }
 }
-const mapStateToProps = ({ entities, ui, session }) => ({
+const mapStateToProps = ({ entities, ui, session }) => {
+  return({
   article: entities.articles[ui.currArticle],
   loading: ui.article_loading,
   currUID: session.currentUser ? session.currentUser.id : null,
   articleId: ui.currArticle
 
-});
+}); 
+};
 const mapDispatchToProps = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchArticle(id)),
   deleteArticle: (id) => dispatch(deleteArticle(id))
@@ -102,7 +114,8 @@ const mapStateToResponse = ({ entities, ui, session }, ownProps) => {
     currUID: session.currentUser ? session.currentUser.id : null,
     articleId: ui.currArticle,
     parentId,
-    parentResponse: entities.responses[parentId]
+    parentResponse: entities.responses[parentId],
+    parentArticle: entities.articles[ui.currArticle]
   });
 };
 

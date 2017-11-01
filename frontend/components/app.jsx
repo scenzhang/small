@@ -13,8 +13,8 @@ const App = () => (
       <Route path="/:route?/:id?/:mode?" component={NavBar}></Route>
     </header>
 
-    <AuthRoute path="/login" component={LoginForm} />
-    <AuthRoute path="/signup" component={SignupForm} />
+    <Route path="/login" component={LoginForm} />
+    <Route path="/signup" component={SignupForm} />
     <Route path="/" exact component={ArticleIndex}></Route>
     <Switch>
       <Route path="/articles/new" component={ArticleForm} />

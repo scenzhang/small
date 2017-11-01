@@ -2,6 +2,15 @@
   margin: 20px 0;
   font-size: 20px;
 }
+.article-back {
+  margin-top: 10px;
+  color: rgba(0,0,0, 0.35);
+
+}
+
+.article-back:hover {
+  color: rgba(0,0,0,0.45);
+}
 
 .article-container {
   margin: 0 auto;

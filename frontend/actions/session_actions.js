@@ -5,7 +5,7 @@ export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 export const login = (user) => (dispatch) => {
-  SessionUtil.login(user)
+  return SessionUtil.login(user)
   .then(
     (user) => dispatch(receiveCurrentUser(user)),
     (res) => dispatch(receiveErrors(res.responseJSON))
@@ -13,7 +13,7 @@ export const login = (user) => (dispatch) => {
 
 }
 export const signup = (user) => (dispatch) => {
-  SessionUtil.signup(user)  
+  return SessionUtil.signup(user)  
   .then(
     (user) => dispatch(receiveCurrentUser(user)),
     (res) => dispatch(receiveErrors(res.responseJSON))
@@ -21,7 +21,7 @@ export const signup = (user) => (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
-  SessionUtil.logout()
+  return SessionUtil.logout()
     .then(() => dispatch(receiveCurrentUser(null)))
 
 }

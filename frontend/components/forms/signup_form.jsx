@@ -63,6 +63,7 @@ class SignupForm extends Component {
   }
 
   render() {
+    debugger
     if (this.props.loggedIn) return (<Redirect to='/' />);
     // const errorLis = this.props.errors.map((error) => <li>{error}</li>);
     return (
@@ -139,8 +140,9 @@ class SignupForm extends Component {
 
 // export default withRouter(SignupForm);
 const mapStateToProps = (state, ownProps) => {
+  debugger
   return {
-    loggedIn: !!state.currentUser,
+    loggedIn: !!state.session.currentUser,
     errors: state.errors.session,
     formType: ownProps.location.pathname.slice(1)
   };

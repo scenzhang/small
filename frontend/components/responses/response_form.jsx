@@ -37,12 +37,12 @@ class ResponseForm extends Component {
   handleChange(e) {
     this.setState({body: e.currentTarget.value, buttonDisabled: !e.currentTarget.value});
   }
-  handleSubmit() {
-    
+  handleSubmit(e) {
+    e.stopPropagation();
     const newResp = {body: this.state.body, article_id: this.props.articleId};
     if (this.props.isResponse) newResp.parent_response_id = this.props.id;
     this.props.createResponse(newResp);
-    this.setState({body: ""})
+    this.setState({body: "", formHidden: true});
   }
   render() {
     return (

@@ -7,7 +7,12 @@ const ArticlesReducer = (state = {}, action) => {
   const newState = merge({}, state);
   switch (action.type) {
     case RECEIVE_ALL_ARTICLES: {
-      return action.articles;
+      Object.keys(action.articles).forEach((id) => {
+        if (!newState[id]) {
+          newState[id] = action.articles[id];
+        }
+      })
+      return newState;
     }
     case RECEIVE_ARTICLE: { 
       newState[action.article.id] = action.article;
