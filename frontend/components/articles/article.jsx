@@ -22,13 +22,12 @@ class Article extends Component {
 
   }
   // shouldComponentUpdate(nextProps, nextState) { //for redirect from login
-  //   debugger
+  //   
   //   // if (this.props.match.params.id != nextProps.match.params.id) return true //update on different id
   //   return !this.props.article;
   // }
 
   componentDidMount() {
-    debugger
     if (!this.props.article || !this.props.article.body || this.props.article.id != this.props.match.params.id) {
       this.props.fetchArticle(this.props.match.params.id);
     }
@@ -36,7 +35,7 @@ class Article extends Component {
 
   }
   componentWillReceiveProps(nextProps) {
-    debugger
+    
     // if (this.props.match.url.includes('article') &&
       if (this.props.match.params.id != nextProps.match.params.id) {
       this.props.fetchArticle(nextProps.match.params.id);
@@ -46,7 +45,7 @@ class Article extends Component {
   }
   render() {
     if (this.state.redirToIndex) return <Redirect to="/" />;
-    debugger
+    
     if (!this.props.article || !this.props.article.body) return <div>loading...</div>;
     let article = this.props.article;
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
