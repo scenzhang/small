@@ -21,19 +21,24 @@ class Article extends Component {
     //when profiles implemented redirect to profile index instead
 
   }
-  shouldComponentUpdate() { //for redirect from login
-    debugger
-    return !this.props.article || !this.props.article.body;
-  }
+  // shouldComponentUpdate(nextProps, nextState) { //for redirect from login
+  //   debugger
+  //   // if (this.props.match.params.id != nextProps.match.params.id) return true //update on different id
+  //   return !this.props.article;
+  // }
 
   componentDidMount() {
-    if (!this.props.article) this.props.fetchArticle(this.props.match.params.id);
+    debugger
+    if (!this.props.article || !this.props.article.body || this.props.article.id != this.props.match.params.id) {
+      this.props.fetchArticle(this.props.match.params.id);
+    }
     if (!this.props.parentResponse && this.props.parentId) this.props.fetchArticle(this.props.parentId);
 
   }
   componentWillReceiveProps(nextProps) {
-    if (this.props.match.url.includes('article') &&
-      this.props.match.params.id != nextProps.match.params.id) {
+    debugger
+    // if (this.props.match.url.includes('article') &&
+      if (this.props.match.params.id != nextProps.match.params.id) {
       this.props.fetchArticle(nextProps.match.params.id);
     }
     if (!this.props.parentResponse && this.props.parentId) this.props.fetchArticle(this.props.parentId);
@@ -41,9 +46,9 @@ class Article extends Component {
   }
   render() {
     if (this.state.redirToIndex) return <Redirect to="/" />;
-    if (!this.props.article) return <div>loading...</div>;
+    debugger
+    if (!this.props.article || !this.props.article.body) return <div>loading...</div>;
     let article = this.props.article;
-    
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
     return (
       <div className="article-response-container">
@@ -91,12 +96,12 @@ class Article extends Component {
     );
   }
 }
-const mapStateToProps = ({ entities, ui, session }) => {
+const mapStateToProps = ({ entities, ui, session }, ownProps) => {
   return({
-  article: entities.articles[ui.currArticle],
+  article: entities.articles[ownProps.match.params.id],
   loading: ui.article_loading,
   currUID: session.currentUser ? session.currentUser.id : null,
-  articleId: ui.currArticle
+  articleId: ownProps.match.params.id
 
 }); 
 };
