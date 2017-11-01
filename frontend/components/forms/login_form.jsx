@@ -13,13 +13,31 @@ class LoginForm extends Component {
 
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const redirectTo = this.props.location.search.split("=")[1] // '?redirect=/url'
-    this.props.login(this.state);
-    this.props.history.push(redirectTo);
+    this.props.login(this.state).then(
+      (res) => {
+        if (res.type="RECEIVE_CURRENT_USER") {
+          this.props.history.push(redirectTo);
+        }
+      }
+    );
+    // if (!this.props.errors) this.props.history.push(redirectTo);
+  }
+  handleDemo(e) {
+    e.preventDefault();
+    const redirectTo = this.props.location.search.split("=")[1] // '?redirect=/url'
+    this.props.demoLogin().then(
+      (res) => {
+        if (res.type="RECEIVE_CURRENT_USER") {
+          this.props.history.push(redirectTo);
+        }
+      }
+    );
   }
 
   handleInput(field) {
@@ -60,7 +78,9 @@ class LoginForm extends Component {
             <button className="dark-button" onClick={this.handleSubmit} > Log In </button>
 
           </form>
-          <div className="signup-link">Are you new to Small? <Link to="signup" onClick={this.props.clearErrors}>Sign up.</Link></div>
+          <div className="signup-link">Are you new to Small? 
+            <Link className="greentext" to="signup" onClick={this.props.clearErrors}> Sign up</Link> or <a className="greentext" onClick={this.handleDemo}>demo</a>
+            .</div>
 
         </div>
       </div>
@@ -80,6 +100,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, { location }) => ({
   login: (user) => dispatch(sessionActions.login(user)),
+  demoLogin: ()=> dispatch(sessionActions.login({email:"demo@small.com", password:"asdfasdf"})),
   clearErrors: () => dispatch(sessionActions.clearErrors())
 
 });
