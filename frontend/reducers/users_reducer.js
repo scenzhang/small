@@ -18,6 +18,10 @@ const UsersReducer = (state={}, action) => {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+export default UsersReducer;
+>>>>>>> Stashed changes
+=======
 export default UsersReducer;
 >>>>>>> Stashed changes
 =======
