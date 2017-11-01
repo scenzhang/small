@@ -18,7 +18,8 @@ class ArticleForm extends Component {
       id: this.props.article ? this.props.article.id : null,
       submitDisabled: true,
       titleInvalid: false,
-      bodyInvalid: false
+      bodyInvalid: false,
+      author_id: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,18 +28,21 @@ class ArticleForm extends Component {
   componentWillUpdate(_, nextState) {
     let submitDisabled = !nextState.title || !nextState.body;
     if (!isEqual(this.state, nextState)) {
-      this.setState( { submitDisabled })
+      this.setState( { submitDisabled });
+    
     }
   }
   componentDidMount() {
-    const { match: { path, params: { articleId } }, article, fetchArticle } = this.props
+    const { match: { path, params: { id } }, article, fetchArticle } = this.props
+    // debugger
     if (path.includes("edit")) {
       if (!article) {
-        fetchArticle(articleId).then((res) => {
-          this.setState({ title: res.article.title, body: res.article.body })
+        fetchArticle(id).then((res) => {
+          this.setState({ title: res.article.title, body: res.article.body, author_id: res.article.user_id });
+
         });
       } else {
-        this.setState({ title: article.title, body: article.body });
+        this.setState({ title: article.title, body: article.body, author_id: article.user_id });
       }
     }
 
@@ -64,9 +68,11 @@ class ArticleForm extends Component {
 
   }
   render() {
-    if (!this.props.loggedIn) {
+    if (!this.props.currentUID) {
       return <Redirect to="/login" />
     }
+    if (this.state.author_id != this.props.currentUID) return <Redirect to={`/articles/${this.props.match.params.id}`} />
+    // if (this.props.currentUID != )
     if (this.state.redirect) return <Redirect to={`/articles/${this.state.id}`} />
     return (
       <div className="form-container">
@@ -100,7 +106,7 @@ class ArticleForm extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     errors: state.errors.articles,
-    loggedIn: !!state.session.currentUser,
+    currentUID: state.session.currentUser.id,
     article: state.entities.articles[ownProps.match.params.articleId],
     id: state.ui.currArticle
   };
