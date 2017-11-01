@@ -50,7 +50,7 @@ ul {
     background-color: rgb(3, 155, 115);
 }
 
-button:disabled {
+.dark-button:disabled {
     background-color: rgba(10, 236, 176, 0.514);
     color: rgb(85, 84, 84);
     cursor: default;
@@ -66,6 +66,10 @@ button:disabled {
     background-color: white;
     border: 1px solid rgb(133, 132, 132);
     color: rgb(133, 132, 132);
+}
+.no-color-button:disabled {
+    cursor: default;
+    color: rgba(133,132,132, 0.3)
 }
 
 a {

@@ -17,7 +17,8 @@ class ResponseForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       formHidden: true,
-      body: ""
+      body: "",
+      buttonDisabled: true
     };
   }
   handleClick(e) {
@@ -34,9 +35,10 @@ class ResponseForm extends Component {
     if(!this.state.body.length) this.setState({ formHidden: true });
   }
   handleChange(e) {
-    this.setState({body: e.currentTarget.value});
+    this.setState({body: e.currentTarget.value, buttonDisabled: !e.currentTarget.value});
   }
   handleSubmit() {
+    
     const newResp = {body: this.state.body, article_id: this.props.articleId};
     if (this.props.isResponse) newResp.parent_response_id = this.props.id;
     this.props.createResponse(newResp);
@@ -52,7 +54,7 @@ class ResponseForm extends Component {
           :
           <form className='response-form serif' >
               <Textarea className='response-field' minRows={5} value={this.state.body} onChange={this.handleChange} autoFocus/>
-              <button className="no-color-button" onClick={this.handleSubmit}>Publish</button>
+              <button className="no-color-button" disabled={this.state.buttonDisabled} onClick={this.handleSubmit}>Publish</button>
             </form>
             
            
