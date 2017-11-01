@@ -1,5 +1,4 @@
-<<<<<<< Updated upstream
-=======
+
 import { merge } from 'lodash'
 import { RECEIVE_USER, LOAD_USER } from '../actions/user_actions';
 
@@ -16,14 +15,4 @@ const UsersReducer = (state={}, action) => {
 
 
 }
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 export default UsersReducer;
->>>>>>> Stashed changes
-=======
-export default UsersReducer;
->>>>>>> Stashed changes
-=======
-export default UsersReducer;
->>>>>>> Stashed changes
