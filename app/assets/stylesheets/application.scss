@@ -21,6 +21,7 @@ span,
 div {
     font-family: Roboto;
 }
+
 body {
     margin: 0;
 }
@@ -30,19 +31,22 @@ ul {
     font-family: Roboto;
 }
 
-button {
-    background-color: rgb(3, 168, 124);
-    border: 0;
-    color: white;
+[class*='-button'] {
     border-radius: 5px;
-    padding: 5px 12px;
+    padding: 4px 12px;
     font-family: Roboto;
     height: 30px;
     width: fit-content;
     cursor: pointer;
 }
 
-button:hover {
+.dark-button {
+    background-color: rgb(3, 168, 124);
+    border: 1px solid rgb(3, 168, 124);
+    color: white;
+}
+
+.dark-button:hover {
     background-color: rgb(3, 155, 115);
 }
 
@@ -52,24 +56,26 @@ button:disabled {
     cursor: default;
 }
 
-.hoverable {
+.light-button {
     background-color: white;
     border: 1px solid rgb(3, 168, 124);
-    border-radius: 5px;
-    font-family: Roboto;
-    padding: 4px 12px;
-    height: 30px;
-    width: fit-content;
-    line-height: 30px;
-    cursor: pointer;
-    color: rgb(3, 168, 124);    
+    color: rgb(3, 168, 124);
+}
+
+.no-color-button {
+    background-color: white;
+    border: 1px solid rgb(133, 132, 132);
+    color: rgb(133, 132, 132);
 }
 
 a {
     text-decoration: none;
 }
-
-.hoverable:hover {
+.greentext {
+    color: rgb(3, 168, 124)
+    
+}
+.light-button:hover {
     color: rgb(3, 155, 115);
     border: 1px solid rgb(3, 155, 115);
 }
@@ -77,15 +83,28 @@ a {
 .serif {
     font-family: "Playfair Display";
 }
-.dropdown-button {
+
+.dropdown-toggle {
     cursor: pointer;
     fill: rgba(0, 0, 0, 0.50);
 }
-.dropdown-button:hover {
-    fill: rgba(0,0,0,0.85);
+
+.dropdown-toggle:hover {
+    fill: rgba(0, 0, 0, 0.85);
 }
+
 .hidden {
     display: none
 }
+
 //components
 @import "components/*";
+.app {
+    height: 100%;
+    min-height: 100vh;
+}
+
+body {
+    height: 100%;
+    min-height: 100vh;
+}

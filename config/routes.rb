@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: :create
     resources :articles, only: %i(create index show update destroy)
-    get '/articles/:id/responses', to: 'articles#responses', as: :responses
+    get '/articles/:id/responses', to: 'articles#responses', as: :article_responses
     resources :responses, only: %i(create show update destroy)
-    
+    get '/responses/:id/replies', to: 'responses#replies', as: :response_replies
     resource :session, only: %i(create destroy)
     
   end

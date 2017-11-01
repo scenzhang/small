@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import Textarea from 'react-textarea-autosize';
 import Errors from '../errors'
 import { isEqual } from 'lodash';
+import {createResponse, fetchResponse, updateResponse } from '../../actions/response_actions'
 
 class ArticleForm extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class ArticleForm extends Component {
       id: this.props.article ? this.props.article.id : null,
       submitDisabled: true,
       titleInvalid: false,
-      bodyInvalid: false
+      bodyInvalid: false,
+      author_id: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,21 +29,33 @@ class ArticleForm extends Component {
   componentWillUpdate(_, nextState) {
     let submitDisabled = !nextState.title || !nextState.body;
     if (!isEqual(this.state, nextState)) {
-      this.setState( { submitDisabled })
+      this.setState( { submitDisabled });
+    
     }
   }
   componentDidMount() {
-    const { match: { path, params: { articleId } }, article, fetchArticle } = this.props
+    const { match: { path, params: { id } }, article, fetchArticle } = this.props
     if (path.includes("edit")) {
       if (!article) {
-        fetchArticle(articleId).then((res) => {
-          this.setState({ title: res.article.title, body: res.article.body })
+        fetchArticle(id).then((res) => {
+          if (res.article) {
+            this.setState({ title: res.article.title, body: res.article.body, author_id: res.article.user_id, id: res.article.id });
+          }
+          if (res.response) {
+            this.setState({title: "Editing response", body: res.response.body, author_id: res.response.user_id, id: res.response.id});
+          }
+
         });
       } else {
-        this.setState({ title: article.title, body: article.body });
+        this.setState({ title: this.props.match.url.includes("article") ? article.title : "Editing response",
+        body: article.body, author_id: article.user_id 
+      });
       }
     }
 
+  }
+  componentWillReceiveProps(nextProps) {
+    debugger
   }
 
 
@@ -58,20 +72,21 @@ class ArticleForm extends Component {
     e.preventDefault();
     // debugger
     this.props.action(this.state).then((res) => {
-
-      this.setState({ redirect: true, id: res.article.id }); //set the id with response so we can correctly redirect
+      this.setState({ redirect: true, url: res.article ? `/articles/${res.article.id}` : `/responses/${res.response.id}`}); //set the id with response so we can correctly redirect
     });
 
   }
   render() {
-    if (!this.props.loggedIn) {
+    if (!this.props.currentUID) {
       return <Redirect to="/login" />
     }
-    if (this.state.redirect) return <Redirect to={`/articles/${this.state.id}`} />
+    if (this.state.author_id && this.state.author_id != this.props.currentUID) return <Redirect to={`/articles/${this.props.match.params.id}`} />
+    // if (this.props.currentUID != )
+    if (this.state.redirect) return <Redirect to={this.state.url} />
     return (
       <div className="form-container">
-        <Errors errors={this.props.errors} />
         <form className="article-form">
+          { this.props.match.url.includes('article') ?
           <Textarea
             autoFocus
             type="text"
@@ -79,7 +94,9 @@ class ArticleForm extends Component {
             placeholder="Title"
             onChange={this.handleChange('title')}
             value={this.state.title}
-          />
+          /> :
+          <h1>{this.state.title}</h1>
+        }
           <Textarea
             minRows={30}
             placeholder="Tell your story..."
@@ -87,6 +104,7 @@ class ArticleForm extends Component {
             onChange={this.handleChange('body')}
             value={this.state.body} />
           <button
+          className="dark-button"
             onClick={this.handleSubmit}
             disabled={this.state.submitDisabled}
           >
@@ -100,9 +118,8 @@ class ArticleForm extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     errors: state.errors.articles,
-    loggedIn: !!state.session.currentUser,
-    article: state.entities.articles[ownProps.match.params.articleId],
-    id: state.ui.currArticle
+    currentUID: state.session.currentUser.id,
+    article: state.entities.articles[ownProps.match.params.id],
   };
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -112,5 +129,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchArticle: (id) => dispatch(fetchArticle(id))
   });
 }
+const mapStateToResponse = (state, ownProps) => {
+  return {
+    currentUID: state.session.currentUser.id,
+    article: state.entities.responses[ownProps.match.params.id]
+  }
+}
 
+const mapDispatchToResponse = (dispatch, ownProps) => {
+  const action = ownProps.match.path.includes("new") ? createResponse : updateResponse;
+  return ({
+    action: (response) => dispatch(action(response)),
+    fetchArticle: (id) => dispatch(fetchResponse(id))
+  })
+}
+export const ResponseForm = connect(mapStateToResponse, mapDispatchToResponse)(ArticleForm);
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleForm);

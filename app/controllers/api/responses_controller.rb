@@ -1,5 +1,5 @@
 class Api::ResponsesController < ApplicationController
-  before_action :ensure_logged_in, except: :show
+  before_action :ensure_logged_in, except: %i(show replies)
   
   def create
     @response = Response.new(response_params)
@@ -31,6 +31,13 @@ class Api::ResponsesController < ApplicationController
     @response = Response.find(params[:id])
     @response.destroy
     render "api/responses/show"                                
+  end
+
+  def replies
+    response = Response.find(params[:id])
+    @responses = response.gen_tree
+    render "api/responses/index"
+
   end
 
   private

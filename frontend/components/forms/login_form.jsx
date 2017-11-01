@@ -17,7 +17,9 @@ class LoginForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const redirectTo = this.props.location.search.split("=")[1] // '?redirect=/url'
     this.props.login(this.state);
+    this.props.history.push(redirectTo);
   }
 
   handleInput(field) {
@@ -55,7 +57,7 @@ class LoginForm extends Component {
             />
             <br />
 
-            <button onClick={this.handleSubmit} > Log In </button>
+            <button className="dark-button" onClick={this.handleSubmit} > Log In </button>
 
           </form>
           <div className="signup-link">Are you new to Small? <Link to="signup" onClick={this.props.clearErrors}>Sign up.</Link></div>

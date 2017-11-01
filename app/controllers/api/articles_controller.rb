@@ -23,7 +23,11 @@ class Api::ArticlesController < ApplicationController
   end
 
   def update
+    
     @article = Article.find(params[:id])
+    if @article.user_id != current_user.id 
+      render json: ['unauthorized'], status: 403 && return
+    end
     if @article.update_attributes(article_params)
       render "api/articles/show"
     else

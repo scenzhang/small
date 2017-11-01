@@ -29,7 +29,9 @@ class SignupForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const redirectTo = this.props.location.search.split("=")[1] // '?redirect=/url'    
     this.props.signup(this.state);
+    this.props.history.push(redirectTo);
 
   }
 
@@ -124,7 +126,7 @@ class SignupForm extends Component {
 
 
 
-            <button className='submit' disabled={this.state.buttonDisabled} onClick={this.handleSubmit}> Sign Up</button>
+            <button className='submit dark-button' disabled={this.state.buttonDisabled} onClick={this.handleSubmit}> Sign Up</button>
 
           </form>
           <div className="login-link">Already have an account? <Link to="login" onClick={this.props.clearErrors}>Log in.</Link></div>

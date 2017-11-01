@@ -7,16 +7,22 @@ class Response < ApplicationRecord
              optional: true
   has_many :responses, foreign_key: :parent_response_id
 
-  def all_children
-    if self.responses.empty?
-      return []
-    end
-    children = []
+  # include Respondable
+  def gen_tree
+    to_visit = []
+    tree = []
     self.responses.each do |res|
-      children << res
-      children << res.all_children
-    end
-    children.flatten
-  end
+      tree << res
+      to_visit += res.responses
+      until to_visit.empty?
+        curr = to_visit.pop
+        to_visit += curr.responses
+        tree << curr
 
+      end
+      
+    end
+    tree
+  end
+  
 end
