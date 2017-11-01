@@ -12,15 +12,27 @@ class _ResponseListItem extends Component {
       <li key={this.props.response.id} className={`level-${this.props.level}`} >
       <div className ="response">
           <DateReadtime date={this.props.response.date} time={this.props.response.time} />
-          {this.props.response.author}
+          <Link className="greentext" to={`/users/${this.props.response.user_id}`}>{this.props.response.author}</Link>
         <Link to={`/responses/${this.props.response.id}`}>
-          <div class="response-body serif">{this.props.response.body}</div>
-        </Link>
+          <div className="response-body serif">{this.props.response.body}</div>
+          </Link>
+          <div className="response-item-footer">
+          <i className="fa fa-sign-language" aria-hidden="true"></i>
+
+        {
+          this.props.level < 3 || !responses.length ||
+          <Link to={`/responses/${this.props.response.id}`}>
+          <span className="too-deep">{responses.length} response{responses.length > 1 ? "s": ""}</span>
+          </Link>
+        }
+        </div>
+      </div>
+        {
+          this.props.level >= 3 ||
           <ul>
             {responses.map((resp) => <ResponseListItem level={this.props.level+1} response={resp}/>)}
-            </ul>
-      </div>
-
+            </ul>   
+        }
       </li>
     );
   }

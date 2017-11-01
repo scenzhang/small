@@ -126,7 +126,7 @@ class SignupForm extends Component {
 
 
 
-            <button className='submit' disabled={this.state.buttonDisabled} onClick={this.handleSubmit}> Sign Up</button>
+            <button className='submit dark-button' disabled={this.state.buttonDisabled} onClick={this.handleSubmit}> Sign Up</button>
 
           </form>
           <div className="login-link">Already have an account? <Link to="login" onClick={this.props.clearErrors}>Log in.</Link></div>

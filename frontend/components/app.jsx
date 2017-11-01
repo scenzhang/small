@@ -6,7 +6,7 @@ import LoginForm from './forms/login_form';
 import SignupForm from './forms/signup_form';
 import ArticleIndex from './articles/article_index';
 import Article, {Response} from './articles/article';
-import ArticleForm from './articles/article_form';
+import ArticleForm, {ResponseForm} from './articles/article_form';
 const App = () => (
   <div className="app">
     <header>
@@ -21,7 +21,7 @@ const App = () => (
       <Route path="/articles/:id/edit" component={ArticleForm} />
       <Route exact path="/articles/:id" component={Article} />
       <Route exact path="/responses/:id" component={Response} />
-      <Route path="/responses/:id/edit" component={ArticleForm} />
+      <Route path="/responses/:id/edit" component={ResponseForm} />
     </Switch>
   </div>
 )

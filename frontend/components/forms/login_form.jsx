@@ -57,7 +57,7 @@ class LoginForm extends Component {
             />
             <br />
 
-            <button onClick={this.handleSubmit} > Log In </button>
+            <button className="dark-button" onClick={this.handleSubmit} > Log In </button>
 
           </form>
           <div className="signup-link">Are you new to Small? <Link to="signup" onClick={this.props.clearErrors}>Sign up.</Link></div>

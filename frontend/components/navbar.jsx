@@ -15,8 +15,8 @@ class NavBar extends React.Component {
         (
           <nav className="logged-in right-nav">
             <span>Welcome, {this.props.currentUser.name}</span>
-            <Link className="hoverable" to="/articles/new">New story</Link>
-            <button
+            <Link className="light-button" to="/articles/new">New story</Link>
+            <button className="dark-button"
               onClick={this.props.logout}
             >
               Log out
@@ -26,9 +26,9 @@ class NavBar extends React.Component {
         :
         (
           <nav className="logged-out right-nav">
-            <div className="hoverable" onClick={this.demoLogin.bind(this)}>Demo</div>
-            <Link className="hoverable" to={`/signup?redirect=${this.props.location.pathname}`} onClick={this.props.clearErrors}>Sign Up</Link>
-            <Link className="hoverable" to={`/login?redirect=${this.props.location.pathname}`} onClick={this.props.clearErrors}>Log In</Link>
+            <div className="light-button" onClick={this.demoLogin.bind(this)}>Demo</div>
+            <Link className="light-button" to={`/signup?redirect=${this.props.location.pathname}`} onClick={this.props.clearErrors}>Sign Up</Link>
+            <Link className="light-button" to={`/login?redirect=${this.props.location.pathname}`} onClick={this.props.clearErrors}>Log In</Link>
           </nav>
         )
     }

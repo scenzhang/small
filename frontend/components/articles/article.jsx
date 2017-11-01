@@ -40,24 +40,25 @@ class Article extends Component {
     let article = this.props.article || { body: "" };
     if (!article.body) return <div>loading...</div>;
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
-    debugger
     return (
-      <div>
+      <div className="article-response-container">
         <div className="article-container">
           <div className="article-heading">
             <h3 className="heading-author">{article.author} </h3>
             <ArticleDateReadtime date={article.date} time={article.time} />
             {
               !this.props.parentResponse || //if parent response isn't loaded don't evaluate rest
+              <Link to={`${this.props.parentId}`}>
               <div className="parent-container">
-                {this.props.parentResponse.body}
-                {this.props.parentResponse.author}
+                <div className="parent-body">{this.props.parentResponse.body}</div>
+                <div className="parent-author">{this.props.parentResponse.author}</div>
               </div>
+              </Link>
             }
             <h1> {article.title} </h1>
             {this.props.currUID === this.props.article.user_id ? //only show dropdown if logged in as owner (change when bookmarks added)
               <DropdownButton
-                className="dropdown-button"
+                className="dropdown-toggle"
                 opts={[<li key="edit"> <Link to={`${this.props.match.url}/edit`}>Edit</Link> </li>,
                 <li key="delete"><a className="delete-article" onClick={this.handleDelete}> Delete </a></li>]}
               />
@@ -72,6 +73,7 @@ class Article extends Component {
           </div>
         </div>
         <div className="responses-container">
+          <div className="response-header">Responses</div>
           <ResponseForm id={article.id} articleId={this.props.articleId} isResponse={this.props.match.url.includes("response")} />
           <ResponseList id={article.id} isResponse={this.props.match.url.includes("response")} />
         </div>

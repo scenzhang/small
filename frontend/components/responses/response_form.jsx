@@ -31,7 +31,7 @@ class ResponseForm extends Component {
   }
   handleClickOutside(e) {
     if (!this.state.formHidden) event.preventDefault(); //only prevent default if the form is showing, ie allow clicking links when form is hidden
-    this.setState({ formHidden: true });
+    if(!this.state.body.length) this.setState({ formHidden: true });
   }
   handleChange(e) {
     this.setState({body: e.currentTarget.value});
@@ -46,13 +46,13 @@ class ResponseForm extends Component {
     return (
       <div className="response-form-container" onClick={this.handleClick}>
           { this.state.formHidden ?
-          <div className={`serif ${this.state.formHidden ? "" : "hidden"}`} onClick={this.handleClick}>
+          <div className={`serif prompt ${this.state.formHidden ? "" : "hidden"}`} onClick={this.handleClick}>
             Write a response...
           </div>
           :
-          <form className={`response-form serif` } >
-              <Textarea value={this.state.body} onChange={this.handleChange} autoFocus/>
-              <button className="hoverable" onClick={this.handleSubmit}>Publish</button>
+          <form className='response-form serif' >
+              <Textarea className='response-field' minRows={5} value={this.state.body} onChange={this.handleChange} autoFocus/>
+              <button className="no-color-button" onClick={this.handleSubmit}>Publish</button>
             </form>
             
            
