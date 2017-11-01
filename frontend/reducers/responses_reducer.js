@@ -6,6 +6,9 @@ import {
 import {
   merge
 } from 'lodash';
+import { RECEIVE_USER } from '../actions/user_actions';
+
+
 const ResponsesReducer = (state = {}, action) => {
   const newState = merge({}, state);
   switch (action.type) {
@@ -26,6 +29,12 @@ const ResponsesReducer = (state = {}, action) => {
         delete newState[action.id];
         return newState;
       }
+    case RECEIVE_USER: {
+      action.user.responses.forEach((resp) => {
+          newState[resp.id] = resp;
+        });
+        return newState;
+    }
     default:
       {
         return state;

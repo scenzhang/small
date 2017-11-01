@@ -2,6 +2,8 @@ import {RECEIVE_ALL_ARTICLES,
   RECEIVE_ARTICLE,
   REMOVE_ARTICLE,
 } from '../actions/article_actions';
+import { RECEIVE_USER } from '../actions/user_actions';
+
 import {merge} from 'lodash';
 const ArticlesReducer = (state = {}, action) => {
   const newState = merge({}, state);
@@ -15,6 +17,12 @@ const ArticlesReducer = (state = {}, action) => {
     }
     case REMOVE_ARTICLE: {
       delete newState[action.id];
+      return newState;
+    }
+    case RECEIVE_USER: {
+      action.user.articles.forEach((article) => {
+        newState[article.id] = article;
+      });
       return newState;
     }
     default: {
