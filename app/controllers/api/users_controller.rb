@@ -14,8 +14,8 @@ class Api::UsersController < ApplicationController
   def show
     @user = User.where(id: params[:id]).includes(:articles, :responses).first
     render "api/users/show"
+
   end
-  
   private
 
   def user_params

@@ -9,6 +9,8 @@ import DropdownButton from '../dropdown'
 import { fetchResponse, deleteResponse } from '../../actions/response_actions';
 import ResponseList from '../responses/response_list'
 import ResponseForm from '../responses/response_form'
+import UserAbout from '../users/user_about'
+import MiniArticlePreview from "./mini_article_preview";
 class Article extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +34,8 @@ class Article extends Component {
       this.props.fetchArticle(this.props.match.params.id);
     }
     if (!this.props.parentResponse && this.props.parentId) this.props.fetchArticle(this.props.parentId);
+    if (!this.props.parentArticle && this.props.parentArticleId) this.props.fetchParentArticle(this.props.parentArticleId);
+
 
   }
   componentWillReceiveProps(nextProps) {
@@ -41,6 +45,8 @@ class Article extends Component {
       this.props.fetchArticle(nextProps.match.params.id);
     }
     if (!this.props.parentResponse && this.props.parentId) this.props.fetchArticle(this.props.parentId);
+    if (!this.props.parentArticle && this.props.parentArticleId) this.props.fetchParentArticle(this.props.parentArticleId);
+
 
   }
   render() {
@@ -53,20 +59,29 @@ class Article extends Component {
       <div className="article-response-container">
         <div className="article-container">
           <div className="article-heading">
-            {this.props.location.pathname.includes("response") &&
-              <Link className="article-back" to={`/articles/${this.props.articleId}`}>
-                Back to article
-              </Link>
-            }
+            <UserAbout userId={article.user_id} link={true} />
             <h3 className="heading-author">{article.author} </h3>
             <ArticleDateReadtime date={article.date} time={article.time} />
             {
+              this.props.parentArticle &&
+              <Link to={`/articles/${this.props.parentArticleId}`}>
+                <MiniArticlePreview
+                  title={this.props.parentArticle.title}
+                  author={this.props.parentArticle.author}
+                  responses={this.props.parentArticle.response_ids.length}
+                />
+
+              </Link>
+            }
+            {
               this.props.parentResponse && //if parent response isn't loaded don't evaluate rest
-              <Link to={`/responses/${this.props.parentId}`}>
-                <div className="parent-container">
-                  <div className="parent-body">{this.props.parentResponse.body}</div>
-                  <div className="parent-author">{this.props.parentResponse.author}</div>
-                </div>
+              <Link to={`${this.props.parentId}`}>
+
+                <MiniArticlePreview
+                  title={this.props.parentResponse.body}
+                  author={this.props.parentResponse.author}
+                  responses={this.props.parentResponse.response_ids.length}
+                />
               </Link>
             }
             <h1> {article.title} </h1>
@@ -111,21 +126,25 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToResponse = ({ entities, ui, session }, ownProps) => {
   const article = entities.responses[ownProps.match.params.id];
-  let parentId;
+  let parentId, parentArticleId;
   if (article) parentId = article.parent_response_id;
+  if (article && !parentId) parentArticleId = article.article_id; //article being responded to
+  let parentArticle = entities.articles[parentArticleId];
   return ({
     article,
     currUID: session.currentUser ? session.currentUser.id : null,
     articleId: ui.currArticle,
     parentId,
     parentResponse: entities.responses[parentId],
-    parentArticle: entities.articles[ui.currArticle]
+    parentArticleId,
+    parentArticle: entities.articles[parentArticleId]
   });
 };
 
 const mapDispatchToResponse = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchResponse(id)),
-  deleteArticle: (id) => dispatch(deleteResponse(id))
+  deleteArticle: (id) => dispatch(deleteResponse(id)),
+  fetchParentArticle: (id) => dispatch(fetchArticle(id))
 })
 export const Response = withRouter(connect(mapStateToResponse, mapDispatchToResponse)(Article));
 

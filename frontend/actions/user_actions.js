@@ -12,5 +12,5 @@ export const loadUser = () => ({ type: LOAD_USER });
 
 export const fetchUser = id => dispatch => {
   dispatch(loadUser());
-  return UserUtil.fetchUser().then( (user) => dispatch(receiveUser(user)) );
+  return UserUtil.fetchUser(id).then( (user) => dispatch(receiveUser(user)) );
 }

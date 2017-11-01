@@ -1,8 +1,9 @@
+
 import { merge } from 'lodash'
 import { RECEIVE_USER, LOAD_USER } from '../actions/user_actions';
 
 const UsersReducer = (state={}, action) => {
-  newState = merge({}, state);
+  const newState = merge({}, state);
   
   switch(action.type) {
     case RECEIVE_USER:
@@ -12,5 +13,6 @@ const UsersReducer = (state={}, action) => {
       return state;
   }
 
-  
+
 }
+export default UsersReducer;
