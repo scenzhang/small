@@ -72,16 +72,25 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, .04);
     border: 1px solid rgba(0, 0, 0, 0.09);
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
+    justify-content: space-between;
     padding: 14px;
-}
 
+}
+.num-responses {
+  float: right;
+  color: rgba(0,0,0,0.54); 
+}
+.num-responses span {
+  padding: 3px;
+}
 .parent-author,
 .prompt {
     color: rgba(0, 0, 0, 0.54);
 }
 
 .parent-container div {
-    margin: 5px;
+    margin: 0px;
+    padding: 5px;
     font-size: 14px;
 }
