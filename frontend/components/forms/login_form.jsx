@@ -79,8 +79,7 @@ class LoginForm extends Component {
 
           </form>
           <div className="signup-link">Are you new to Small? 
-            <Link className="greentext" to="signup" onClick={this.props.clearErrors}>Sign up</Link> or
-            <a className="greentext" onClick={this.handleDemo}>demo</a>
+            <Link className="greentext" to="signup" onClick={this.props.clearErrors}>Sign up</Link> or <a className="greentext" onClick={this.handleDemo}>demo</a>
             .</div>
 
         </div>
