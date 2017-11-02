@@ -11,10 +11,12 @@ function MiniArticlePreview({ title, author, responses }) {
         <div className="parent-body">{title}</div>
         <div className="parent-author">{author}</div>
       </div>
-      <div className="num-responses">
-        <span>{responses}</span>
-      <i class="fa fa-comment" aria-hidden="true"></i>
+      <div>
+        <div className="num-responses">
+          <span>{responses}</span>
+          <i class="fa fa-comment" aria-hidden="true"></i>
         </div>
+      </div>
     </div>
   );
 

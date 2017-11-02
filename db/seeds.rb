@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
-User.create!(name:"Demo Account", email:"demo@small.com", blurb: "this web app extremely owns", password:"asdfasdf")
+User.create!(name:"Demo Account", email:"demo@small.com", blurb: "just a demo user", password:"asdfasdf")
 10.times do
   name = Faker::WorldOfWarcraft.unique.hero
   email_name = name.split(" ").first.downcase.gsub(/[^0-9a-z]/i, '')

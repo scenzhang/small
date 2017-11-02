@@ -25,13 +25,19 @@ class Article extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.article) this.props.fetchArticle(this.props.match.params.id);
+    // debugger
+
+    if (!this.props.article || this.props.article.id != this.props.match.params.id) {
+      this.props.fetchArticle(this.props.match.params.id);
+    }
+
     if (!this.props.parentResponse && this.props.parentId) this.props.fetchArticle(this.props.parentId);
     if (!this.props.parentArticle && this.props.parentArticleId) this.props.fetchParentArticle(this.props.parentArticleId);
 
 
   }
   componentWillReceiveProps(nextProps) {
+    // debugger
     if (this.props.match.url.includes('article') &&
       this.props.match.params.id != nextProps.match.params.id) {
       this.props.fetchArticle(nextProps.match.params.id);
@@ -43,6 +49,7 @@ class Article extends Component {
   }
   render() {
     if (this.state.redirToIndex) return <Redirect to="/" />;
+    // debugger
     let article = this.props.article || { body: "" };
     if (!article.body) return <div>loading...</div>;
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
@@ -101,11 +108,11 @@ class Article extends Component {
     );
   }
 }
-const mapStateToProps = ({ entities, ui, session }) => ({
-  article: entities.articles[ui.currArticle],
+const mapStateToProps = ({ entities, ui, session }, ownProps) => ({
+  article: entities.articles[ownProps.match.params.id],
   loading: ui.article_loading,
   currUID: session.currentUser ? session.currentUser.id : null,
-  articleId: ui.currArticle
+  articleId: ui.currArticle //this is necessary because response form can be for either article or response and in the latter case we need the current article id as well as response id
 
 });
 const mapDispatchToProps = (dispatch) => ({

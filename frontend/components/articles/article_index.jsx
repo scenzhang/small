@@ -13,7 +13,7 @@ class ArticleIndex extends Component {
     return (
       <div className="index">
       <ul>
-        {this.props.articles.map( article => <ArticlePreview key={article.id} article={article} author="asdf"/>)}
+        {this.props.articles.map( article => <ArticlePreview key={article.id} article={article} url={`/articles/${article.id}`}/>)}
       </ul>
       </div>
     );

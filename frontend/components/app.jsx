@@ -24,10 +24,8 @@ const App = () => (
     </Switch>
     <Route exact path="/responses/:id" component={Response} />
     <Route path="/responses/:id/edit" component={ResponseForm} />
-    <Route path="/users/:id" component={UserProfile} />
-    <Switch>
-      {/* <Route exact path="/users/:id/"> */}
-    </Switch>
+    <Route path="/users/:id/:mode?" component={UserProfile} />
+
   </div>
 )
 
