@@ -37,7 +37,7 @@ class _ResponseListItem extends Component {
     );
   }
 }
-
+//TODO: export this without recursive response rendering for profile page
 const mapStateToProps = ({entities: {responses}}) => ({
   responses
 });

@@ -13,7 +13,7 @@ class UserAbout extends Component {
   }
 
   componentDidMount() {
-    if (!this.props.user) {
+    if (!this.props.user && this.props.userId) {
       this.props.fetchUser(this.props.userId);
     }
   }
@@ -25,7 +25,7 @@ class UserAbout extends Component {
     <h1 className="user-about-name">{this.props.user.name}</h1>
 
     return (
-      <div class="user-about">
+      <div className="user-about">
         {name}
         <p className="user-blurb">{this.props.user.blurb}</p>
         <button className="light-button" onClick={this.handleClick.bind(this)}>Follow</button>
@@ -36,7 +36,7 @@ class UserAbout extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.entities.users[ownProps.userId]
+    user: ownProps.user || state.entities.users[ownProps.userId]
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {

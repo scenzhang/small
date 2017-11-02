@@ -1,10 +1,14 @@
-.response {
+.response, .user-item {
     border: 1px solid rgba(0, 0, 0, 0.09);
     background-color: #fff;
     margin: 5px 0;
-    padding: 10px;
+    padding: 10px; 
 }
 
+.user-item {
+    margin: 10px auto;
+    width: 55%;
+}
 .list-item-container {
     margin: 25px 0;
 }
@@ -22,7 +26,7 @@
     margin-bottom: 15px;
 }
 
-.response-item-footer {
+.response-item-footer, .item-footer {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
@@ -35,7 +39,7 @@
   margin-left: 15px;
 }
 
-.response-body {
+.response-body, .item-body {
   margin: 15px 0;
 }
 .divider-line {
