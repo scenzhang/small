@@ -22,10 +22,7 @@ function ArticlePreview({ article, url }) {
             <Link to={`/users/${article.user_id}`} className="article-author">{article.author}</Link>
             <div className="details">
             <ArticleDateReadtime date={article.date} time={article.time} />
-            {article.response_ids && <div className="num-responses">
-              <span>{article.response_ids.length}</span>
-              <i class="fa fa-comment" aria-hidden="true"></i>
-            </div>}
+            
             </div>
           </div>
         </div>

@@ -58,10 +58,11 @@ ul {
 }
 
 .grey-hoverable {
-    color: rgba(0,0,0,0.50);
+    color: rgba(0,0,0,0.50)!important;
+    margin: 5px 0;
 }
 .grey-hoverable:hover {
-    color: rgba(0,0,0,0.60);
+    color: rgba(0,0,0,0.60)!important;
 }
 .light-button {
     background-color: white;

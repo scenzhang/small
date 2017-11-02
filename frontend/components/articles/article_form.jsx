@@ -54,9 +54,7 @@ class ArticleForm extends Component {
     }
 
   }
-  componentWillReceiveProps(nextProps) {
-    debugger
-  }
+
 
 
 

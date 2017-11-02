@@ -9,7 +9,7 @@ function UserNav({id}) {
     <div className="user-nav">
       <Link to={`/users/${id}/articles`}> Articles </Link>
       <Link to={`/users/${id}/responses`}> Responses </Link>
-      
+      <Link to={`/users/${id}/following`}> Following </Link>
       </div>
   )
 }

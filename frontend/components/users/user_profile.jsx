@@ -15,8 +15,14 @@ class UserProfile extends Component {
     if (!this.props.user) {
       this.props.fetchUser(this.props.match.params.id);
     }
-
-
+    window.scrollTo(0,0);
+    
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    if (this.props.match.params.id != nextProps.match.params.id) {
+      this.props.fetchUser(nextProps.match.params.id);
+    }
   }
   render() {
     let mode = this.props.match.params.mode
@@ -28,6 +34,19 @@ class UserProfile extends Component {
         <UserNav id={this.props.user ? this.props.user.id : null} />
         {(() => {
           switch (mode) {
+            case "following":
+              return (
+                <div className="user-follows">
+                  <div className="follows-header">Following</div>
+                  <ul>
+                    { this.props.user && this.props.follows[this.props.user.id] &&
+                      this.props.follows[this.props.user.id].User
+                      .map(followingId => <UserAbout className="following-about" userId={followingId}/>)
+                    }
+                  </ul>
+                  </div>
+                  
+              )
             case "responses":
               return (
                 <div className="user-responses">
@@ -80,7 +99,8 @@ class UserProfile extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    user: state.entities.users[ownProps.match.params.id]
+    user: state.entities.users[ownProps.match.params.id],
+    follows: state.entities.follows
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
