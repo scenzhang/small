@@ -30,18 +30,33 @@ class Article extends Component {
   // }
 
   componentDidMount() {
+<<<<<<< HEAD
     if (!this.props.article || !this.props.article.body || this.props.article.id != this.props.match.params.id) {
       this.props.fetchArticle(this.props.match.params.id);
     }
+=======
+    // debugger
+
+    if (!this.props.article || this.props.article.id != this.props.match.params.id) {
+      this.props.fetchArticle(this.props.match.params.id);
+    }
+
+>>>>>>> 0dfef1f1242b13895ca0c5d4319d01d6bd50576a
     if (!this.props.parentResponse && this.props.parentId) this.props.fetchArticle(this.props.parentId);
     if (!this.props.parentArticle && this.props.parentArticleId) this.props.fetchParentArticle(this.props.parentArticleId);
 
 
   }
   componentWillReceiveProps(nextProps) {
+<<<<<<< HEAD
     
     // if (this.props.match.url.includes('article') &&
       if (this.props.match.params.id != nextProps.match.params.id) {
+=======
+    // debugger
+    if (this.props.match.url.includes('article') &&
+      this.props.match.params.id != nextProps.match.params.id) {
+>>>>>>> 0dfef1f1242b13895ca0c5d4319d01d6bd50576a
       this.props.fetchArticle(nextProps.match.params.id);
     }
     if (!this.props.parentResponse && this.props.parentId) this.props.fetchArticle(this.props.parentId);
@@ -51,9 +66,15 @@ class Article extends Component {
   }
   render() {
     if (this.state.redirToIndex) return <Redirect to="/" />;
+<<<<<<< HEAD
     
     if (!this.props.article || !this.props.article.body) return <div>loading...</div>;
     let article = this.props.article;
+=======
+    // debugger
+    let article = this.props.article || { body: "" };
+    if (!article.body) return <div>loading...</div>;
+>>>>>>> 0dfef1f1242b13895ca0c5d4319d01d6bd50576a
     let articlePs = article.body.split("\n").map((p, i) => <p key={i}>{p}</p>)
     return (
       <div className="article-response-container">
@@ -110,15 +131,13 @@ class Article extends Component {
     );
   }
 }
-const mapStateToProps = ({ entities, ui, session }, ownProps) => {
-  return({
+const mapStateToProps = ({ entities, ui, session }, ownProps) => ({
   article: entities.articles[ownProps.match.params.id],
   loading: ui.article_loading,
   currUID: session.currentUser ? session.currentUser.id : null,
-  articleId: ownProps.match.params.id
+  articleId: ui.currArticle //this is necessary because response form can be for either article or response and in the latter case we need the current article id as well as response id
 
 }); 
-};
 const mapDispatchToProps = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchArticle(id)),
   deleteArticle: (id) => dispatch(deleteArticle(id))
