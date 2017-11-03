@@ -29,10 +29,22 @@ class ArticleIndex extends Component {
 
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+  let following = state.session.currentUser && state.entities.follows[state.session.currentUser.id] ? 
+    state.entities.follows[state.session.currentUser.id].User : "ALL"
+  let toDisplay = following === "ALL" ? Object.keys(state.entities.articles) : [];
+  if (following != "ALL") {
+    Object.values(state.entities.articles).forEach((article) => {
+      if (following.includes(article.user_id)) {
+        toDisplay.push(article.id);
+      }
+    });
+  }
+  return ({
   articles: state.entities.articles,
-  toDisplay: state.ui.toDisplay === 'ALL' ? Object.keys(state.entities.articles) : state.ui.toDisplay
+  toDisplay
 });
+}
 const mapDispatchToProps = (dispatch) => ({
   fetchArticles: () => dispatch(fetchArticles())
 });
