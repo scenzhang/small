@@ -18,6 +18,7 @@ class Article extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+
   handleDelete() {
     this.props.deleteArticle(this.props.article.id).then(() => this.setState({ redirToIndex: true }));
     //when profiles implemented redirect to profile index instead
@@ -36,7 +37,7 @@ class Article extends Component {
     if (!this.props.parentResponse && this.props.parentId) this.props.fetchArticle(this.props.parentId);
     if (!this.props.parentArticle && this.props.parentArticleId) this.props.fetchParentArticle(this.props.parentArticleId);
 
-
+    window.scrollTo(0,0);
   }
   componentWillReceiveProps(nextProps) {
     
@@ -60,7 +61,6 @@ class Article extends Component {
         <div className="article-container">
           <div className="article-heading">
             <UserAbout userId={article.user_id} link={true} />
-            <h3 className="heading-author">{article.author} </h3>
             <ArticleDateReadtime date={article.date} time={article.time} />
             {
               this.props.parentArticle &&
@@ -110,15 +110,13 @@ class Article extends Component {
     );
   }
 }
-const mapStateToProps = ({ entities, ui, session }, ownProps) => {
-  return({
+const mapStateToProps = ({ entities, ui, session }, ownProps) => ({
   article: entities.articles[ownProps.match.params.id],
   loading: ui.article_loading,
   currUID: session.currentUser ? session.currentUser.id : null,
-  articleId: ownProps.match.params.id
+  articleId: ui.currArticle //this is necessary because response form can be for either article or response and in the latter case we need the current article id as well as response id
 
 }); 
-};
 const mapDispatchToProps = (dispatch) => ({
   fetchArticle: (id) => dispatch(fetchArticle(id)),
   deleteArticle: (id) => dispatch(deleteArticle(id))

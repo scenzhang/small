@@ -8,6 +8,7 @@
 
 User.destroy_all
 User.create!(name: "Demo Account", email: "demo@small.com", blurb: "A dummy user to demo the app", password: "asdfasdf")
+
 10.times do
   name = Faker::WorldOfWarcraft.unique.hero
   email_name = name.split(" ").first.downcase.gsub(/[^0-9a-z]/i, '')

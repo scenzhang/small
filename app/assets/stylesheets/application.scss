@@ -41,9 +41,10 @@ ul {
 }
 
 .dark-button {
-    background-color: rgb(3, 168, 124);
+    background-color: rgb(8, 185, 138);
     border: 1px solid rgb(3, 168, 124);
     color: white;
+    
 }
 
 .dark-button:hover {
@@ -56,10 +57,17 @@ ul {
     cursor: default;
 }
 
+.grey-hoverable {
+    color: rgba(0,0,0,0.50)!important;
+    margin: 5px 0;
+}
+.grey-hoverable:hover {
+    color: rgba(0,0,0,0.60)!important;
+}
 .light-button {
     background-color: white;
-    border: 1px solid rgb(3, 168, 124);
-    color: rgb(3, 168, 124);
+    color: rgb(8, 185, 138);
+    border: 1px solid rgb(8, 185, 138);
 }
 
 .light-button:hover {
@@ -81,8 +89,11 @@ a {
     cursor: pointer;
 }
 .greentext {
-    color: rgb(3, 168, 124)
+    color: rgb(8, 185, 138)
     
+}
+.greentext:hover {
+    color: rgb(3, 155, 115);
 }
 
 .serif {

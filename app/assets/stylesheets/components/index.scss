@@ -49,6 +49,11 @@
   position: absolute;
   bottom: 16px;
   font-size: 15px;
+  width: 65%;
+}
+.details {
+  display: flex;
+  justify-content: space-between;
 }
 .divider:after {
   content: '\00B7';
