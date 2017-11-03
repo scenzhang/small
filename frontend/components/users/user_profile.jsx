@@ -15,10 +15,10 @@ class UserProfile extends Component {
     if (!this.props.user) {
       this.props.fetchUser(this.props.match.params.id);
     }
-    window.scrollTo(0,0);
-    
+    window.scrollTo(0, 0);
+
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (this.props.match.params.id != nextProps.match.params.id) {
       this.props.fetchUser(nextProps.match.params.id);
@@ -27,6 +27,7 @@ class UserProfile extends Component {
   render() {
     let mode = this.props.match.params.mode
     if (mode) mode = mode.toLowerCase();
+    debugger
     return (
       <div>
 
@@ -39,20 +40,20 @@ class UserProfile extends Component {
                 <div className="user-follows">
                   <div className="response-header">Following</div>
                   <ul>
-                    { this.props.user && this.props.follows[this.props.user.id] &&
+                    {this.props.user && this.props.follows[this.props.user.id] &&
                       this.props.follows[this.props.user.id].User
-                      .map(followingId => <UserAbout link={true} className="following-about" userId={followingId}/>)
+                        .map(followingId => <UserAbout link={true} className="following-about" userId={followingId} />)
                     }
                   </ul>
-                  </div>
-                  
+                </div>
+
               )
             case "responses":
               return (
                 <div className="user-responses">
                   <div className="response-header">Responses</div>
                   <ul>
-                    {this.props.user && this.props.user.responses.map(response =>
+                    {this.props.user && this.props.responses && this.props.responses.map(response =>
                       <UserProfileItem
                         body={response.body}
                         author={response.author}
@@ -72,7 +73,7 @@ class UserProfile extends Component {
                 <div className="user-articles">
                   <div className="response-header">Articles</div>
                   <ul>
-                    {this.props.user && this.props.user.articles.map(article =>
+                    {this.props.user &&  this.props.articles && this.props.articles.map(article =>
                       <UserProfileItem
                         key={article.id}
                         title={article.title}
@@ -98,8 +99,25 @@ class UserProfile extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  let articles = [];
+  if (state.entities.articles) {
+    Object.values(state.entities.articles).forEach((article) => {
+      if (article.user_id == ownProps.match.params.id) {
+        articles.push(article);
+      }
+    });
+  }
+  let responses = [];
+  if (state.entities.responses) {
+    Object.values(state.entities.responses).forEach((response) => {
+      if (response.user_id == ownProps.match.params.id) {
+        responses.push(response);
+      }
+    });
+  }
   return {
     user: state.entities.users[ownProps.match.params.id],
+    articles, responses,
     follows: state.entities.follows
   }
 }

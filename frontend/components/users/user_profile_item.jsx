@@ -7,12 +7,14 @@ import DateReadtime from '../articles/date_readtime';
 
 
 function UserProfileItem({ title, blurb, body, author, numResponses, date,time, id, author_url, item_url }) {
+  debugger
   return (
     <li key={id} >
       <div className="user-item">
         <DateReadtime date={date} time={time} />
         <Link className="greentext" to={author_url}>{author}</Link>
         <Link to={item_url}>
+          <h1 className="article-title">{title}</h1>
           <div className="item-blurb serif"> {blurb} </div>
           <div className="item-body serif">{body.slice(0, 240)}{body.length > 240 ? "..." : ""}</div>
           {body.length > 240 && <div className="grey-hoverable">Read more...</div>}
