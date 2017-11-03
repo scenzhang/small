@@ -44,7 +44,7 @@ class ArticleForm extends Component {
       if (!article) {
         fetchArticle(id).then((res) => {
           if (res.article) {
-            this.setState({ title: res.article.title, body: res.article.body, author_id: res.article.user_id, id: res.article.id });
+            this.setState({ title: res.article.title, blurb:res.article.blurb, body: res.article.body, author_id: res.article.user_id, id: res.article.id });
           }
           if (res.response) {
             this.setState({title: "Editing response", body: res.response.body, author_id: res.response.user_id, id: res.response.id});
@@ -107,6 +107,13 @@ class ArticleForm extends Component {
             />
             {this.state.blurbField && 
             <Textarea autoFocus 
+            type="text" 
+            className="blurb-field" 
+            onChange={this.handleChange('blurb')} 
+            value={this.state.blurb}/>
+          }
+          {this.state.blurb && 
+            <Textarea 
             type="text" 
             className="blurb-field" 
             onChange={this.handleChange('blurb')} 
