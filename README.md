@@ -8,19 +8,22 @@ Small is a full-stack web app inspired by Medium. It runs Ruby on Rails in the b
 
 ### Articles
 
+Users can publish and edit articles, and read articles from other users.
+
 ![Article example](docs/article-create.gif)
 
 ![Create article](docs/article-edit.gif)
 
-Users can publish and edit articles, and read articles from other users.
 
 ### Responses
 ![Response example](docs/response-create.gif)
+
 Users can respond to articles from other users, as well as other responses. Through polymorphic component design, responses can be viewed in their own page like an article. Each response displays its parent in a preview pane, which can be used to navigate to the parent.
 
 ### User profiles
 ![Profile example](docs/user-follow-profile.gif)
-Each user has a profile that displays all stories by that user, as well as the other users they are following. 
+
+Each user has a profile that displays all stories by that user, as well as the other users they are following. The same component is used for displaying a user's information on the article page, the user's page, and the user's list of follows.
 
 ### Feed
 
