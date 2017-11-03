@@ -1,24 +1,35 @@
-# README
+# Small
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Small live](https://sm-all.herokuapp.com/)
 
-Things you may want to cover:
+Small is a full-stack web app inspired by Medium. It runs Ruby on Rails in the backend with a PostgreSQL database and React.js with Redux architecture in the frontend.
 
-* Ruby version
+## Features and Implementation
 
-* System dependencies
+### Articles
 
-* Configuration
+![Article example](docs/article-create.gif)
 
-* Database creation
+![Create article](docs/article-edit.gif)
 
-* Database initialization
+Users can publish and edit articles, and read articles from other users.
 
-* How to run the test suite
+### Responses
+![Response example](docs/response-create.gif)
+Users can respond to articles from other users, as well as other responses. Through polymorphic component design, responses can be viewed in their own page like an article. Each response displays its parent in a preview pane, which can be used to navigate to the parent.
 
-* Services (job queues, cache servers, search engines, etc.)
+### User profiles
+![Profile example](docs/user-follow-profile.gif)
+Each user has a profile that displays all stories by that user, as well as the other users they are following. 
 
-* Deployment instructions
+### Feed
 
-* ...
+Each user has a personalized homepage that displays articles only by users they are following.
+
+### Single page
+
+No page reloads are required to navigate Small. Components are only updated when necessary.
+
+
+
+
