@@ -14,8 +14,18 @@
   height: 500px;
   
 }
-
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+.blurb-field {
+  margin-top: 0px!important;
+}
 .article-form textarea {
   margin: 20px 30px;
   
+}
+
+textarea {
+  resize: none;
 }

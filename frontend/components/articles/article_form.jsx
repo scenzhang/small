@@ -15,15 +15,18 @@ class ArticleForm extends Component {
     this.state = {
       title: "",
       body: "",
+      blurb: "",
       redirect: false,
       id: this.props.article ? this.props.article.id : null,
       submitDisabled: true,
       titleInvalid: false,
       bodyInvalid: false,
-      author_id: null
+      author_id: null,
+      blurbField: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePress = this.handlePress.bind(this);
   }
 
   componentWillUpdate(_, nextState) {
@@ -33,6 +36,8 @@ class ArticleForm extends Component {
     
     }
   }
+
+ 
   componentDidMount() {
     const { match: { path, params: { id } }, article, fetchArticle } = this.props
     if (path.includes("edit")) {
@@ -56,7 +61,12 @@ class ArticleForm extends Component {
   }
 
 
-
+  handlePress(e) {
+    if (e.key== 'Enter') {
+      e.preventDefault();
+      this.setState({blurbField: true})
+    }
+  }
 
   handleChange(field) {
     return (e) => {
@@ -85,14 +95,24 @@ class ArticleForm extends Component {
       <div className="form-container">
         <form className="article-form">
           { this.props.match.url.includes('article') ?
-          <Textarea
-            autoFocus
-            type="text"
-            className="title-field"
-            placeholder="Title"
-            onChange={this.handleChange('title')}
-            value={this.state.title}
-          /> :
+          <div className="title-container">
+            <Textarea
+              autoFocus
+              type="text"
+              className="title-field"
+              placeholder="Title"
+              onChange={this.handleChange('title')}
+              onKeyPress={this.handlePress}
+              value={this.state.title}
+            />
+            {this.state.blurbField && 
+            <Textarea autoFocus 
+            type="text" 
+            className="blurb-field" 
+            onChange={this.handleChange('blurb')} 
+            value={this.state.blurb}/>
+          }
+          </div> :
           <h1>{this.state.title}</h1>
         }
           <Textarea
