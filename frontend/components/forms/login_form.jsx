@@ -22,6 +22,7 @@ class LoginForm extends Component {
     this.props.login(this.state).then(
       (res) => {
         if (res.type="RECEIVE_CURRENT_USER") {
+          debugger
           this.props.history.push(redirectTo);
         }
       }
@@ -33,6 +34,7 @@ class LoginForm extends Component {
     const redirectTo = this.props.location.search.split("=")[1] // '?redirect=/url'
     this.props.demoLogin().then(
       (res) => {
+        debugger
         if (res.type="RECEIVE_CURRENT_USER") {
           this.props.history.push(redirectTo);
         }
@@ -48,6 +50,7 @@ class LoginForm extends Component {
 
   render() {
     if (this.props.loggedIn) return (<Redirect to='/' />);
+    debugger
     // const errorLis = this.props.errors.map((error) => <li>{error}</li>);
     return (
       <div className="wrapper">

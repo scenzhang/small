@@ -24,6 +24,13 @@ export const receiveAllArticles = (articles) => ({
   type: RECEIVE_ALL_ARTICLES, articles
 });
 
+// export const fetchFeed = (userId) => (dispatch) => {
+//   dispatch(loadArticles());
+//   return ArticleUtil.fetchFeed(userId).then(
+//     articles=> dispatch(receiveAllArticles(articles))
+//   );
+// }
+
 export const fetchArticle = (id) => (dispatch) => {
   dispatch(loadArticle());
   return ArticleUtil.fetchArticle(id).then(

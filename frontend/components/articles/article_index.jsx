@@ -13,10 +13,14 @@ class ArticleIndex extends Component {
   }
 
   render() {
+    debugger
+    if (this.props.toDisplay && this.props.articles && //todisplay or articles has not yet been updated and are out of sync
+      this.props.toDisplay.length > Object.keys(this.props.articles).length) return <div>loading...</div>
     return (
       <div className="index">
         <ul>
-          {this.props.articles.map(article => <ArticlePreview key={article.id} article={article} url={`/articles/${article.id}`} />)}
+          {this.props.toDisplay && this.props.articles && 
+            this.props.toDisplay.map(id => <ArticlePreview key={id} article={this.props.articles[id]} url={`/articles/${id}`} />)}
         </ul>
       </div>
     );
@@ -26,7 +30,8 @@ class ArticleIndex extends Component {
 
 
 const mapStateToProps = (state) => ({
-  articles: allArticles(state)
+  articles: state.entities.articles,
+  toDisplay: state.ui.toDisplay === 'ALL' ? Object.keys(state.entities.articles) : state.ui.toDisplay
 });
 const mapDispatchToProps = (dispatch) => ({
   fetchArticles: () => dispatch(fetchArticles())

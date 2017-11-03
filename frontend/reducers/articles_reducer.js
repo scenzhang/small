@@ -6,6 +6,7 @@ import { RECEIVE_USER } from '../actions/user_actions';
 
 import {merge} from 'lodash';
 const ArticlesReducer = (state = {}, action) => {
+  
   const newState = merge({}, state);
   switch (action.type) {
     case RECEIVE_ALL_ARTICLES: {

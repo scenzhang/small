@@ -20,13 +20,13 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def feed_items
-    @articles = Article
-      .joins("join users on articles.user_id = users.id join follows on follows.followable_id = users.id")
-      .where("follower_id = #{params[:id]}")
-      .order(updated_at: :desc)
-    render "api/articles/index"
-  end
+  # def feed_items
+  #   @articles = Article
+  #     .joins("join users on articles.user_id = users.id join follows on follows.followable_id = users.id")
+  #     .where("follower_id = #{params[:id]}")
+  #     .order(updated_at: :desc)
+  #   render "api/articles/index"
+  # end
 
   private
 
