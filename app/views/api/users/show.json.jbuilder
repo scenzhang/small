@@ -9,3 +9,14 @@ json.responses do
     json.partial! 'api/responses/response', response: response
   end
 end
+
+articles = Article
+.joins("join users on articles.user_id = users.id join follows on follows.followable_id = users.id")
+.where("follower_id = #{@user.id}")
+.order(updated_at: :desc)
+.map(&:id)
+
+
+json.feedItems do
+   json.array! articles
+end

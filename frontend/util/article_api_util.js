@@ -16,3 +16,6 @@ export const deleteArticle = id => $.ajax({
   url: `api/articles/${id}`,
   method: 'delete'
 });
+// export const fetchFeed = userId => $.ajax({
+//   url: `api/users/${userId}/feed`
+// })

@@ -41,7 +41,7 @@ class UserProfile extends Component {
                   <ul>
                     { this.props.user && this.props.follows[this.props.user.id] &&
                       this.props.follows[this.props.user.id].User
-                      .map(followingId => <UserAbout className="following-about" userId={followingId}/>)
+                      .map(followingId => <UserAbout link={true} className="following-about" userId={followingId}/>)
                     }
                   </ul>
                   </div>

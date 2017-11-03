@@ -37,7 +37,7 @@ class UserAbout extends Component {
       <div className={`user-about ${this.props.className}`}>
         {name}
         <p className="user-blurb">{this.props.user.blurb}</p>
-        {this.props.user && this.props.currentUser.id != this.props.user.id &&
+        {this.props.user &&  (!this.props.currentUser || this.props.currentUser.id != this.props.user.id) &&
           <FollowButton isFollowing={this.props.following} onClick={this.handleClick.bind(this)}></FollowButton>}
       </div>
     );
