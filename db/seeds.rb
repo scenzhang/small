@@ -89,3 +89,19 @@ end
   r.save!
 
 end
+
+Follow.destroy_all
+User.where.not(email: "demo@small.com").each do |u|
+  Follow.create!(follower_id: User.first.id, followable_id: u.id, followable_type: "User")
+end
+
+10.times do
+
+  follower = User.where.not(email: "demo@small.com").sample
+  followee = nil
+  loop do
+    followee = User.where.not(email: "demo@small.com").sample
+    break if followee.id != follower.id 
+  end
+  Follow.create(follower_id: follower.id, followable_id: followee.id, followable_type: "User")
+end
