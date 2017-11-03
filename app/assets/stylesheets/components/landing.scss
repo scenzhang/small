@@ -1,0 +1,39 @@
+.landing-img {
+  background-image: image_url("landing-bg.png");
+  // min-width: 588px;
+  // min-height: 500px;
+  width: 50%;
+  // height: 450px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center; 
+}
+.landing-header {
+  font-size: 55px;
+  font-weight: 700;
+  margin: 15px;
+  margin-top: 20px;
+}
+.landing-subhead {
+  color: rgba(0,0,0,0.76);
+  margin: 15px;
+  margin-bottom: 25px;
+  font-size:20px;
+}
+.landing-button {
+  margin: 15px;
+  padding: 8px 15px;
+  font-weight: 100;
+}
+.landing-text {
+  width: 50%;
+  position: relative;
+}
+.landing {
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+  height: 500px;
+  padding: 25px;
+  
+}

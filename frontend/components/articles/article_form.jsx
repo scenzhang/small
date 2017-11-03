@@ -68,7 +68,7 @@ class ArticleForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // debugger
+    // 
     this.props.action(this.state).then((res) => {
       this.setState({ redirect: true, url: res.article ? `/articles/${res.article.id}` : `/responses/${res.response.id}`}); //set the id with response so we can correctly redirect
     });

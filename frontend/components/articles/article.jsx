@@ -63,7 +63,7 @@ class Article extends Component {
             <UserAbout userId={article.user_id} link={true} />
             <ArticleDateReadtime date={article.date} time={article.time} />
             {
-              this.props.parentArticle &&
+              this.props.parentArticle && this.props.parentArticle.response_ids &&
               <Link to={`/articles/${this.props.parentArticleId}`}>
                 <MiniArticlePreview
                   title={this.props.parentArticle.title}
@@ -74,7 +74,7 @@ class Article extends Component {
               </Link>
             }
             {
-              this.props.parentResponse && //if parent response isn't loaded don't evaluate rest
+              this.props.parentResponse && this.props.parentResponse.response_ids &&//if parent response isn't loaded don't evaluate rest
               <Link to={`${this.props.parentId}`}>
 
                 <MiniArticlePreview

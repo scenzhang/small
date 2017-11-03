@@ -18,7 +18,7 @@ function UserProfileItem({ title, blurb, body, author, numResponses, date,time, 
           {body.length > 240 && <div className="grey-hoverable">Read more...</div>}
         </Link>
         <div className="item-footer">
-          <i className="fa fa-sign-language" aria-hidden="true"></i>
+          {/* <i className="fa fa-sign-language" aria-hidden="true"></i> */}
 
           <div className="num-responses">
             <span>{numResponses}</span>

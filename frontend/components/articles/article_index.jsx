@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchArticles } from '../../actions/article_actions'
 import { allArticles } from '../../reducers/selectors'
 import ArticlePreview from './article_preview';
-
+import Landing from '../landing';
 class ArticleIndex extends Component {
   
   componentDidMount() {
@@ -13,15 +13,18 @@ class ArticleIndex extends Component {
   }
 
   render() {
-    debugger
+    
     if (this.props.toDisplay && this.props.articles && //todisplay or articles has not yet been updated and are out of sync
       this.props.toDisplay.length > Object.keys(this.props.articles).length) return <div>loading...</div>
     return (
+      <div>
+        {!this.props.loggedIn && <Landing/>}
       <div className="index">
         <ul>
           {this.props.toDisplay && this.props.articles && 
             this.props.toDisplay.map(id => <ArticlePreview key={id} article={this.props.articles[id]} url={`/articles/${id}`} />)}
         </ul>
+      </div>
       </div>
     );
   }
@@ -42,7 +45,8 @@ const mapStateToProps = (state) => {
   }
   return ({
   articles: state.entities.articles,
-  toDisplay
+  toDisplay,
+  loggedIn: !!state.session.currentUser
 });
 }
 const mapDispatchToProps = (dispatch) => ({

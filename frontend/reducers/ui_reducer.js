@@ -55,11 +55,11 @@ const UIReducer = (state = {}, action) => {
     case RECEIVE_RESPONSES:
       newState.response_loaded = true;
       newState.currResponses = [];
-      // debugger
+      // 
       action.responses.forEach((res) => {
         // if (res.parent_response_id === null)// || !newState.currResponses.includes(res.parent_response_id))
         //   newState.currResponses.push(res.id)
-        // debugger
+        // 
         if (res.parent_response_id == newState.response_id) {
           newState.currResponses.push(res.id)
         }
@@ -69,7 +69,7 @@ const UIReducer = (state = {}, action) => {
       // newState.response_id = null;
       return newState;
     case RECEIVE_RESPONSE:
-      // debugger
+      // 
       newState.response_loaded = true;
       if (action.response.parent_response_id == newState.response_id) // || !newState.currResponses.includes(action.response.parent_response_id))
         newState.currResponses.push(action.response.id)

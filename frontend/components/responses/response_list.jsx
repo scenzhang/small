@@ -29,7 +29,7 @@ class ResponseList extends Component {
     return (
       <ul className="responses">
         { /* this.props.responseIds.map( (id)=> {
-          // debugger
+          // 
         return (<li key={id}>
         <Link to={`/responses/${id}`}>
         {this.props.responses[id].body} 

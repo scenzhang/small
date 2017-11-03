@@ -29,16 +29,18 @@ class UserAbout extends Component {
   render() {
     if (!this.props.user) return <p>loading...</p>
     let name = this.props.link ?
-      <Link className="user-about-name" to={`/users/${this.props.user.id}`}> {this.props.user.name} </Link>
+      <Link className="user-about-name" to={`/users/${this.props.user.id}`}>{this.props.user.name}</Link>
       :
-      <h1 className="user-about-name">{this.props.user.name}</h1>
-    // debugger
+      <div className="my-name">{this.props.user.name}</div>
+    // 
     return (
       <div className={`user-about ${this.props.className}`}>
-        {name}
+        <div className="user-name">
+          {name}
+          {this.props.user &&  (!this.props.currentUser || this.props.currentUser.id != this.props.user.id) &&
+            <FollowButton isFollowing={this.props.following} onClick={this.handleClick.bind(this)}></FollowButton>}
+        </div>
         <p className="user-blurb">{this.props.user.blurb}</p>
-        {this.props.user &&  (!this.props.currentUser || this.props.currentUser.id != this.props.user.id) &&
-          <FollowButton isFollowing={this.props.following} onClick={this.handleClick.bind(this)}></FollowButton>}
       </div>
     );
   }
@@ -46,7 +48,7 @@ class UserAbout extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   let user = ownProps.user || state.entities.users[ownProps.userId];
-  // debugger
+  // 
   let following = state.session.currentUser && user && state.entities.follows[state.session.currentUser.id] &&
     state.entities.follows[state.session.currentUser.id].User.includes(user.id);
 

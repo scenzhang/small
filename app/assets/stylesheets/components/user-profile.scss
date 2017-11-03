@@ -3,3 +3,46 @@
   margin: 15px auto;
   text-align: center;
 }
+.user-about {
+  margin: 10px 0;
+}
+.user-name {
+  font-size: 14px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.user-about-name:hover {
+  text-decoration: underline;
+}
+.my-name, .user-about-name {
+  padding: 7px 0;
+}
+.profile-about {
+  margin: 15px auto;
+  width: 60%;
+  
+  
+}
+.following-about {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 10px;  
+}
+
+.user-follows ul {
+  margin: 0 auto;
+  width: 55%;
+}
+.user-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+.user-name button {
+  padding: 1px 4px;
+  margin-left: 10px;
+}
+
+.user-blurb {
+  color: rgba(0,0,0,0.50);
+}

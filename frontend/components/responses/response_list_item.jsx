@@ -17,7 +17,7 @@ class _ResponseListItem extends Component {
           <div className="response-body serif">{this.props.response.body}</div>
           </Link>
           <div className="response-item-footer">
-          <i className="fa fa-sign-language" aria-hidden="true"></i>
+          {/* <i className="fa fa-sign-language" aria-hidden="true"></i> */}
 
         {
           this.props.level < 3 || !responses.length ||

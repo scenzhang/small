@@ -37,7 +37,7 @@ class UserProfile extends Component {
             case "following":
               return (
                 <div className="user-follows">
-                  <div className="follows-header">Following</div>
+                  <div className="response-header">Following</div>
                   <ul>
                     { this.props.user && this.props.follows[this.props.user.id] &&
                       this.props.follows[this.props.user.id].User

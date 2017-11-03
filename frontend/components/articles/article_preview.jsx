@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import dateStr from '../../util/date_str'
 import ArticleDateReadtime from './date_readtime';
 function ArticlePreview({ article, url }) {
-  debugger
+  
   let date = dateStr(article.date)
   return (
     <li className='article-preview' key={article.id}>

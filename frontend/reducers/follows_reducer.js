@@ -32,11 +32,11 @@ const followsReducer = (state = {}, action) => {
     case REMOVE_FOLLOW:
       {
         remove(newState[action.follow.follower_id][action.follow.followable_type], (n) => n === action.follow.followable_id);
-        // debugger
+        // 
         return newState;
       }
     case RECEIVE_CURRENT_USER:
-    // debugger
+    // 
       if (!action.user) return state;
         
     case RECEIVE_USER: //when we receive a user also populate his followers/follows
