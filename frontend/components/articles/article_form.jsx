@@ -41,24 +41,25 @@ class ArticleForm extends Component {
   componentDidMount() {
     const { match: { path, params: { id } }, article, fetchArticle } = this.props
     if (path.includes("edit")) {
-      if (!article) {
+      if (!article) { //need to fetch the item
         fetchArticle(id).then((res) => {
           if (res.article) {
-            this.setState({ title: res.article.title, blurb:res.article.blurb, body: res.article.body, author_id: res.article.user_id, id: res.article.id });
+            this.setState({ title: res.article.title, blurb:res.article.blurb, body: res.article.body, author_id: res.article.user_id, id: res.article.id, blurbField: true });
           }
           if (res.response) {
             this.setState({title: "Editing response", body: res.response.body, author_id: res.response.user_id, id: res.response.id});
           }
 
         });
-      } else {
+      } else { //have the item in state
         this.setState({ title: this.props.match.url.includes("article") ? article.title : "Editing response",
-        body: article.body, author_id: article.user_id 
+        body: article.body, author_id: article.user_id, blurb: this.props.match.url.includes("article") ? article.blurb : ""
       });
       }
     }
 
   }
+
 
 
   handlePress(e) {
@@ -105,20 +106,20 @@ class ArticleForm extends Component {
               onKeyPress={this.handlePress}
               value={this.state.title}
             />
-            {this.state.blurbField && 
+            {(this.state.blurbField || this.state.blurb) &&
             <Textarea autoFocus 
             type="text" 
             className="blurb-field" 
             onChange={this.handleChange('blurb')} 
             value={this.state.blurb}/>
           }
-          {this.state.blurb && 
+          {/* {this.state.blurb && 
             <Textarea 
             type="text" 
             className="blurb-field" 
             onChange={this.handleChange('blurb')} 
             value={this.state.blurb}/>
-          }
+          } */}
           </div> :
           <h1>{this.state.title}</h1>
         }
