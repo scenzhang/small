@@ -7,7 +7,6 @@ import DateReadtime from '../articles/date_readtime';
 
 
 function UserProfileItem({ title, blurb, body, author, numResponses, date,time, id, author_url, item_url }) {
-  debugger
   return (
     <li key={id} >
       <div className="user-item">

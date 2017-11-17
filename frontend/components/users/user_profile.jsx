@@ -27,7 +27,6 @@ class UserProfile extends Component {
   render() {
     let mode = this.props.match.params.mode
     if (mode) mode = mode.toLowerCase();
-    debugger
     return (
       <div>
 
