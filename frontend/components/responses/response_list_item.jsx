@@ -30,7 +30,7 @@ class _ResponseListItem extends Component {
         {
           this.props.level >= 3 ||
           <ul>
-            {responses.map((resp) => <ResponseListItem level={this.props.level+1} response={resp}/>)}
+            {responses.map((resp) => <ResponseListItem key={resp.id}level={this.props.level+1} response={resp}/>)}
             </ul>   
         }
       </li>

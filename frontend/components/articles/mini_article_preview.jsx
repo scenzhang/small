@@ -14,7 +14,7 @@ function MiniArticlePreview({ title, author, responses }) {
       <div>
         <div className="num-responses">
           <span>{responses}</span>
-          <i class="fa fa-comment" aria-hidden="true"></i>
+          <i className="fa fa-comment" aria-hidden="true"></i>
         </div>
       </div>
     </div>

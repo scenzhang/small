@@ -43,7 +43,7 @@ class ResponseList extends Component {
         {
           this.props.responseIds.map((id) => {
             return (
-              <div className="list-item-container">
+              <div className="list-item-container" key={id}>
                 <div className="divider-line"/>
             <ResponseListItem level={0} response={this.props.responses[id]} />
             </div>
