@@ -23,7 +23,7 @@ function UserProfileItem({ title, blurb, body, author, numResponses, date,time, 
 
           <div className="num-responses">
             <span>{numResponses}</span>
-            <i class="fa fa-comment" aria-hidden="true"></i>
+            <i className="fa fa-comment" aria-hidden="true"></i>
           </div>
         </div>
       </div>
